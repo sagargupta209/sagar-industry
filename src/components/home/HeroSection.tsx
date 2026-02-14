@@ -61,13 +61,22 @@ const HeroSection = () => {
     return () => clearInterval(timer);
   }, [slides.length]);
 
-  const slide = slides[current];
+  // Safety check: if slides is empty or current is out of bounds
+  const slide = slides.length > 0 && slides[current] ? slides[current] : null;
+
+  if (!slide) {
+    return (
+        <div className="relative h-[60vh] md:h-screen w-full overflow-hidden bg-gray-100 flex items-center justify-center">
+            <div className="animate-pulse bg-gray-300 w-full h-full"></div>
+        </div>
+    );
+  }
 
   return (
     <div className="relative h-[60vh] md:h-screen w-full overflow-hidden bg-white">
       <AnimatePresence mode="wait">
         <motion.div
-          key={slide._id || slide.id}
+          key={slide._id || slide.id || current}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -75,17 +84,22 @@ const HeroSection = () => {
           className="absolute inset-0"
         >
           {/* Desktop Image */}
-          <img 
-            src={slide.image} 
-            alt="Hero Background" 
-            className="hidden md:block w-full h-full object-cover lg:object-fill"
-          />
+          {slide.image && (
+             <img 
+               src={slide.image} 
+               alt="Hero Background" 
+               className="hidden md:block w-full h-full object-cover lg:object-fill"
+             />
+          )}
+
           {/* Mobile Image */}
-          <img 
-            src={slide.imageMobile || slide.image} 
-            alt="Hero Background Mobile" 
-            className="block md:hidden w-full h-full object-cover"
-          />
+          {(slide.imageMobile || slide.image) && (
+             <img 
+               src={slide.imageMobile || slide.image} 
+               alt="Hero Background Mobile" 
+               className="block md:hidden w-full h-full object-cover"
+             />
+          )}
           
         </motion.div>
       </AnimatePresence>
@@ -108,7 +122,7 @@ const HeroSection = () => {
       <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-30 flex space-x-2">
         {slides.map((s, index) => (
           <button
-            key={s._id || s.id}
+            key={s._id || s.id || index}
             onClick={() => setCurrent(index)}
             className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all ${index === current ? 'bg-orange-500 w-6 md:w-8' : 'bg-black/20'}`}
           />
