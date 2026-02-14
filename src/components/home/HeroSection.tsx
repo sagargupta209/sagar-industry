@@ -10,25 +10,25 @@ const defaultSlides = [
     _id: '1',
     title: 'Taste the Crunch',
     description: 'Spicy & Tangy Premier Potato Chips',
-    image: '/images/new/image1.jpg',
+    image: '/images/new/image1.jpg', // Spicy Chips
   },
   {
     _id: '2',
     title: 'Golden Bakery Goodness',
     description: 'Crunchy Rusk & Buttered Toast',
-    image: '/images/new/3.jpeg',
+    image: '/images/new/image7.jpg', // Rusk/Toast/Bakery Vibe
   },
   {
     _id: '3',
     title: 'Authentic Indian Namkeen',
     description: 'Traditional Flavors for Every Mood',
-    image: '/images/new/66.jpeg',
+    image: '/images/new/image6.jpg', // Mix Snacks/Namkeen
   },
   {
     _id: '4',
     title: 'Premium Toast & Breads',
     description: 'Baked to Perfection Daily',
-    image: '/images/new/4.jpeg',
+    image: '/images/new/image4.jpg', // Bakery/Breads
   }
 ];
 

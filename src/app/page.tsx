@@ -72,14 +72,14 @@ export default function Home() {
             >
               {/* Main Image (Top) */}
               <img 
-                src="/images/new/image11.jpg" 
+                src="/images/new/image11.png" 
                 alt="Chaat Papdi" 
                 className="w-full h-auto drop-shadow-[0_35px_35px_rgba(0,0,0,0.3)] relative z-30"
               />
               
               {/* Background Image Left */}
               <motion.img 
-                src="/images/new/22.jpeg" 
+                src="/images/new/image2.png" 
                 className="absolute top-4 -left-12 w-[85%] h-auto opacity-60 blur-[1px] -rotate-12 z-20"
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 0.6, x: 0 }}
@@ -88,7 +88,7 @@ export default function Home() {
 
               {/* Background Image Right */}
               <motion.img 
-                src="/images/new/3.jpeg" 
+                src="/images/new/image3.png" 
                 className="absolute top-4 -right-12 w-[85%] h-auto opacity-60 blur-[1px] rotate-12 z-10"
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 0.6, x: 0 }}
