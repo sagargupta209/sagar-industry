@@ -1,0 +1,99 @@
+'use client';
+
+import Link from 'next/link';
+
+export default function ShopHero() {
+  return (
+    <section className="relative w-full overflow-hidden bg-[#22c55e]">
+      {/* Decorative floating elements */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Large decorative circles */}
+        <div className="absolute -top-20 -right-20 w-80 h-80 bg-[#16a34a] rounded-full opacity-40" />
+        <div className="absolute -bottom-16 -left-16 w-64 h-64 bg-[#4ade80] rounded-full opacity-50" />
+        <div className="absolute top-1/2 left-1/3 w-40 h-40 bg-yellow-400/20 rounded-full blur-2xl" />
+        <div className="absolute bottom-10 right-1/4 w-32 h-32 bg-orange-400/15 rounded-full blur-xl" />
+
+        {/* Subtle pattern overlay */}
+        <div
+          className="absolute inset-0 opacity-5"
+          style={{
+            backgroundImage: `radial-gradient(circle, #000 1px, transparent 1px)`,
+            backgroundSize: '24px 24px',
+          }}
+        />
+      </div>
+
+      {/* Content Container */}
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 md:pt-36 pb-16 sm:pb-20 md:pb-24">
+        {/* Breadcrumb */}
+        <nav className="flex items-center gap-2 text-white/80 text-sm font-medium mb-10 md:mb-14">
+          <Link href="/" className="hover:text-white transition-colors">
+            Home
+          </Link>
+          <span className="text-white/50">/</span>
+          <span className="text-white font-semibold">Shop</span>
+        </nav>
+
+        {/* Hero Content — two column on desktop */}
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 relative">
+          {/* Left Text */}
+          <div className="w-full lg:w-1/2 mx-auto lg:mx-0 text-center lg:text-left relative z-20 flex flex-col items-center lg:items-start">
+            {/* Subtle Brand Badge */}
+            <div className="hidden lg:inline-flex items-center gap-2 mb-6 justify-start">
+              <div className="bg-[#1a237e] text-yellow-400 px-3 py-1.5 rounded-lg border-2 border-yellow-500/80 shadow-lg">
+                <span className="text-lg font-black tracking-wider uppercase">SAGAR</span>
+              </div>
+              <span className="text-white/90 font-bold text-sm uppercase tracking-widest">Industries</span>
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white leading-[1.05] mb-6 drop-shadow-lg max-w-2xl lg:max-w-none mx-auto lg:mx-0">
+              Taste the
+              <span className="block text-yellow-300">Crunch!</span>
+            </h1>
+            <p className="text-lg sm:text-xl text-white/85 max-w-lg mx-auto lg:mx-0 leading-relaxed font-medium">
+              Explore our premium range of chips, namkeens, fryums & more — made with the authentic flavours of Gujarat.
+            </p>
+          </div>
+
+          {/* Right Visual — Decorative snack composition */}
+          <div className="hidden lg:block w-full lg:w-1/2 max-w-md lg:max-w-lg relative mt-4 lg:mt-0 z-10">
+            <div className="relative w-full aspect-square">
+              {/* Central product showcase circle */}
+              <div className="absolute inset-4 bg-white/15 backdrop-blur-sm rounded-full border-2 border-white/20 flex items-center justify-center shadow-2xl overflow-hidden">
+                 <img 
+                   src="https://images.unsplash.com/photo-1599488615731-7e5128160cc3?q=80&w=1974&auto=format&fit=crop" 
+                   alt="Premium Snacks Assortment" 
+                   className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700"
+                 />
+              </div>
+
+              {/* Orbit decorations */}
+              <div className="absolute -top-2 left-1/2 -translate-x-1/2 bg-yellow-400 text-[#1a237e] px-4 py-2 rounded-full font-black text-sm shadow-lg border-2 border-yellow-300 animate-bounce">
+                NEW!
+              </div>
+              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded-full font-bold text-xs shadow-lg uppercase tracking-wider">
+                100% Quality
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom wave separator */}
+      <div className="absolute bottom-0 left-0 right-0">
+        <svg
+          viewBox="0 0 1440 80"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-full h-auto"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0 40C240 80 480 0 720 40C960 80 1200 0 1440 40V80H0V40Z"
+            fill="#f9fafb"
+          />
+        </svg>
+      </div>
+    </section>
+  );
+}

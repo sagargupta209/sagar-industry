@@ -1,0 +1,18 @@
+﻿Server:  reliance.reliance
+Address:  2405:201:3000:4b7f::c0a8:1d01
+
+_mongodb._tcp.sagarindustry.mygs9em.mongodb.net	SRV service location:
+	  priority       = 0
+	  weight         = 0
+	  port           = 27017
+	  svr hostname   = ac-1hq149u-shard-00-00.mygs9em.mongodb.net
+_mongodb._tcp.sagarindustry.mygs9em.mongodb.net	SRV service location:
+	  priority       = 0
+	  weight         = 0
+	  port           = 27017
+	  svr hostname   = ac-1hq149u-shard-00-01.mygs9em.mongodb.net
+_mongodb._tcp.sagarindustry.mygs9em.mongodb.net	SRV service location:
+	  priority       = 0
+	  weight         = 0
+	  port           = 27017
+	  svr hostname   = ac-1hq149u-shard-00-02.mygs9em.mongodb.net
