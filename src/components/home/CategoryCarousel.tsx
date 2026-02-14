@@ -138,11 +138,11 @@ const CategoryCarousel = () => {
         </div>
 
         {/* Carousel Section */}
-        <motion.div ref={carouselRef} className="cursor-grab active:cursor-grabbing overflow-visible px-4 md:px-0">
+        <motion.div ref={carouselRef} className="cursor-grab active:cursor-grabbing overflow-visible">
             <motion.div 
                drag="x" 
                dragConstraints={{ right: 0, left: -width }} 
-               className="flex space-x-6 md:space-x-10 pb-12"
+               className="flex space-x-6 md:space-x-10 px-2 pb-12"
             >
                 {categories.map((cat, index) => (
                     <motion.div 

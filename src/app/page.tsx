@@ -45,7 +45,12 @@ export default function Home() {
       </section>
 
       {/* ── Best Sellers (Enhanced) ── */}
-      <section className="bg-gray-50">
+      <section className="py-8 md:py-24 bg-gray-50">
+         <div className="container mx-auto px-6 mb-6 md:mb-12 text-center">
+            <span className="text-orange-500 font-bold tracking-widest uppercase text-sm">Customer Favorites</span>
+            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mt-2 mb-4">Trending Snacks</h2>
+            <div className="w-24 h-1.5 bg-yellow-400 mx-auto rounded-full"></div>
+         </div>
          <CategoryCarousel />
       </section>
 
