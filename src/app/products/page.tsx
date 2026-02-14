@@ -15,15 +15,25 @@ export const metadata = {
 };
 
 async function getProducts() {
-  await dbConnect();
-  const products = await Product.find({}).populate('category').lean();
-  return JSON.parse(JSON.stringify(products));
+  try {
+    await dbConnect();
+    const products = await Product.find({}).populate('category').lean();
+    return JSON.parse(JSON.stringify(products));
+  } catch (error) {
+    console.warn('Could not fetch products during build:', error);
+    return [];
+  }
 }
 
 async function getCategories() {
-  await dbConnect();
-  const categories = await Category.find({}).lean();
-  return JSON.parse(JSON.stringify(categories));
+  try {
+    await dbConnect();
+    const categories = await Category.find({}).lean();
+    return JSON.parse(JSON.stringify(categories));
+  } catch (error) {
+    console.warn('Could not fetch categories during build:', error);
+    return [];
+  }
 }
 
 export default async function ProductsPage() {
