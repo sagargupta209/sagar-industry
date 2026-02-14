@@ -47,6 +47,7 @@ export default function AdminDashboard() {
   const [heroTitle, setHeroTitle] = useState('');
   const [heroDesc, setHeroDesc] = useState('');
   const [heroImage, setHeroImage] = useState('');
+  const [heroImageMobile, setHeroImageMobile] = useState('');
 
   // Testimonial
   const [testName, setTestName] = useState('');
@@ -210,7 +211,7 @@ export default function AdminDashboard() {
   const clearForms = () => {
       setCatName(''); setCatImage('');
       setProdName(''); setProdImage(''); setProdCategory('');
-      setHeroTitle(''); setHeroDesc(''); setHeroImage('');
+      setHeroTitle(''); setHeroDesc(''); setHeroImage(''); setHeroImageMobile('');
       setTestName(''); setTestReview(''); setTestRole('Verified Customer');
       setFaqQuestion(''); setFaqAnswer(''); setFaqCategory('General');
       setEditingId(null);
@@ -262,7 +263,7 @@ export default function AdminDashboard() {
 
   const handleAddHero = async (e: React.FormEvent) => {
     e.preventDefault();
-    if(!heroTitle || !heroDesc || !heroImage) return alert('Fill all fields');
+    if(!heroImage) return alert('At least Desktop Image is required');
 
     const method = editingId ? 'PUT' : 'POST';
     const url = editingId ? `/api/hero?id=${editingId}` : '/api/hero';
@@ -270,7 +271,12 @@ export default function AdminDashboard() {
     const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: heroTitle, description: heroDesc, image: heroImage }),
+        body: JSON.stringify({ 
+            title: heroTitle, 
+            description: heroDesc, 
+            image: heroImage,
+            imageMobile: heroImageMobile 
+        }),
     });
 
     if (res.ok) {
@@ -368,9 +374,10 @@ export default function AdminDashboard() {
 
   const setEditHero = (slide: any) => {
       setEditingId(slide._id);
-      setHeroTitle(slide.title);
-      setHeroDesc(slide.description);
+      setHeroTitle(slide.title || '');
+      setHeroDesc(slide.description || '');
       setHeroImage(slide.image);
+      setHeroImageMobile(slide.imageMobile || '');
       setActiveTab('hero');
   };
 
@@ -683,16 +690,33 @@ export default function AdminDashboard() {
                   {editingId && <button onClick={clearForms} className="text-gray-400 hover:text-gray-600"><X size={20}/></button>}
                 </div>
                 <form onSubmit={handleAddHero} className="space-y-4">
-                  <input type="text" placeholder="Title" className="w-full p-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none transition" value={heroTitle} onChange={e => setHeroTitle(e.target.value)} />
-                  <input type="text" placeholder="Description" className="w-full p-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none transition" value={heroDesc} onChange={e => setHeroDesc(e.target.value)} />
-                  <div className="border-2 border-dashed border-gray-200 p-8 text-center rounded-2xl relative cursor-pointer hover:bg-orange-50/30 transition group">
-                      <input type="file" onChange={(e) => handleFileChange(e, setHeroImage)} className="absolute inset-0 opacity-0 cursor-pointer w-full h-full" accept="image/*" />
-                      <div className="flex flex-col items-center">
-                        <ImageIcon className="text-gray-400 group-hover:text-orange-500 mb-2 transition" size={32} />
-                        <span className="text-sm text-gray-500 font-medium">{heroImage ? 'Image Selected' : 'Click to Upload Image'}</span>
-                      </div>
+                  <input type="text" placeholder="Title (Optional)" className="w-full p-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none transition" value={heroTitle} onChange={e => setHeroTitle(e.target.value)} />
+                  <input type="text" placeholder="Description (Optional)" className="w-full p-3 border rounded-xl focus:ring-2 focus:ring-orange-500 outline-none transition" value={heroDesc} onChange={e => setHeroDesc(e.target.value)} />
+                  
+                  <div className="space-y-2">
+                    <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Desktop Banner *</p>
+                    <div className="border-2 border-dashed border-gray-200 p-6 text-center rounded-2xl relative cursor-pointer hover:bg-orange-50/30 transition group">
+                        <input type="file" onChange={(e) => handleFileChange(e, setHeroImage)} className="absolute inset-0 opacity-0 cursor-pointer w-full h-full" accept="image/*" />
+                        <div className="flex flex-col items-center">
+                          <ImageIcon className="text-gray-400 group-hover:text-orange-500 mb-1 transition" size={24} />
+                          <span className="text-xs text-gray-500 font-medium">{heroImage ? 'Desktop Selected' : 'Click to Upload Desktop Image'}</span>
+                        </div>
+                    </div>
+                    {heroImage && <img src={heroImage} className="w-full h-24 object-cover rounded-xl shadow-inner" alt="Preview"/>}
                   </div>
-                  {heroImage && <img src={heroImage} className="w-full h-40 object-cover rounded-xl shadow-inner" alt="Preview"/>}
+
+                  <div className="space-y-2">
+                    <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Mobile Banner (Optional)</p>
+                    <div className="border-2 border-dashed border-gray-200 p-6 text-center rounded-2xl relative cursor-pointer hover:bg-orange-50/30 transition group">
+                        <input type="file" onChange={(e) => handleFileChange(e, setHeroImageMobile)} className="absolute inset-0 opacity-0 cursor-pointer w-full h-full" accept="image/*" />
+                        <div className="flex flex-col items-center">
+                          <ImageIcon className="text-gray-400 group-hover:text-orange-500 mb-1 transition" size={24} />
+                          <span className="text-xs text-gray-500 font-medium">{heroImageMobile ? 'Mobile Selected' : 'Click to Upload Mobile Image'}</span>
+                        </div>
+                    </div>
+                    {heroImageMobile && <img src={heroImageMobile} className="w-full h-24 object-cover rounded-xl shadow-inner" alt="Preview"/>}
+                  </div>
+
                   <button className="w-full bg-orange-600 text-white py-3 rounded-xl hover:bg-orange-700 font-bold shadow-lg shadow-orange-200 transition transform active:scale-95">
                       {editingId ? 'Update' : 'Save'} Slide
                   </button>
@@ -722,8 +746,9 @@ export default function AdminDashboard() {
                         <button onClick={() => handleDelete('/api/hero', slide._id)} className="p-2.5 transition-all duration-300 bg-white/90 backdrop-blur text-red-500 hover:bg-red-500 hover:text-white rounded-xl shadow-xl border border-red-100"><Trash2 size={18}/></button>
                     </div>
                     <div className="absolute bottom-6 left-6 right-6">
-                        <h4 className="font-black text-2xl text-white mb-2 leading-tight">{slide.title}</h4>
-                        <p className="text-gray-300 text-sm line-clamp-2 font-medium">{slide.description}</p>
+                        {slide.imageMobile && <span className="bg-orange-500 text-white text-[8px] font-bold px-2 py-0.5 rounded-full uppercase mb-2 inline-block">Mobile Version Available</span>}
+                        <h4 className="font-black text-2xl text-white mb-2 leading-tight">{slide.title || 'Untitled Slide'}</h4>
+                        <p className="text-gray-300 text-sm line-clamp-2 font-medium">{slide.description || 'No description'}</p>
                     </div>
                   </div>
                 </div>

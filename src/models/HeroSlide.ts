@@ -3,15 +3,19 @@ import mongoose from 'mongoose';
 const HeroSlideSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: true,
+    required: false,
   },
   description: {
     type: String,
-    required: true,
+    required: false,
   },
   image: {
     type: String,
     required: true,
+  },
+  imageMobile: {
+    type: String,
+    required: false,
   },
   order: {
     type: Number,
