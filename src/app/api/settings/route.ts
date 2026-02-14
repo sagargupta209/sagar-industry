@@ -17,8 +17,8 @@ export async function GET() {
 }
 
 export async function PUT(req: Request) {
-  await dbConnect();
   try {
+    await dbConnect();
     const body = await req.json();
     let settings = await SiteSettings.findOne({});
     
@@ -30,6 +30,7 @@ export async function PUT(req: Request) {
     
     return NextResponse.json({ success: true, data: settings });
   } catch (error: any) {
+    console.error('API Error:', error);
     return NextResponse.json({ success: false, error: error.message }, { status: 400 });
   }
 }

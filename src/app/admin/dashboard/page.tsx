@@ -195,6 +195,7 @@ export default function AdminDashboard() {
         await Promise.all(unread.map(m => 
           fetch(`/api/contact?id=${m._id}`, {
             method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ isRead: true })
           })
         ));
@@ -222,13 +223,19 @@ export default function AdminDashboard() {
     const method = editingId ? 'PUT' : 'POST';
     const url = editingId ? `/api/categories?id=${editingId}` : '/api/categories';
 
-    await fetch(url, {
+    const res = await fetch(url, {
       method,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: catName, image: catImage }),
     });
-    clearForms();
-    fetchData();
+    
+    if (res.ok) {
+      clearForms();
+      fetchData();
+    } else {
+      const data = await res.json();
+      alert(`Error: ${data.error || 'Failed to save'}`);
+    }
   };
 
   const handleAddProduct = async (e: React.FormEvent) => {
@@ -238,13 +245,19 @@ export default function AdminDashboard() {
     const method = editingId ? 'PUT' : 'POST';
     const url = editingId ? `/api/products?id=${editingId}` : '/api/products';
 
-    await fetch(url, {
+    const res = await fetch(url, {
       method,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: prodName, image: prodImage, category: prodCategory }),
     });
-    clearForms();
-    fetchData();
+
+    if (res.ok) {
+      clearForms();
+      fetchData();
+    } else {
+      const data = await res.json();
+      alert(`Error: ${data.error || 'Failed to save'}`);
+    }
   };
 
   const handleAddHero = async (e: React.FormEvent) => {
@@ -254,13 +267,19 @@ export default function AdminDashboard() {
     const method = editingId ? 'PUT' : 'POST';
     const url = editingId ? `/api/hero?id=${editingId}` : '/api/hero';
 
-    await fetch(url, {
+    const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title: heroTitle, description: heroDesc, image: heroImage }),
     });
-    clearForms();
-    fetchData();
+
+    if (res.ok) {
+        clearForms();
+        fetchData();
+    } else {
+        const data = await res.json();
+        alert(`Error: ${data.error || 'Failed to save'}`);
+    }
   };
 
   const handleAddTestimonial = async (e: React.FormEvent) => {
@@ -270,25 +289,37 @@ export default function AdminDashboard() {
     const method = editingId ? 'PUT' : 'POST';
     const url = editingId ? `/api/testimonials?id=${editingId}` : '/api/testimonials';
 
-    await fetch(url, {
+    const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: testName, review: testReview, role: testRole }),
     });
-    clearForms();
-    fetchData();
+
+    if (res.ok) {
+        clearForms();
+        fetchData();
+    } else {
+        const data = await res.json();
+        alert(`Error: ${data.error || 'Failed to save'}`);
+    }
   };
 
   const handleUpdateSettings = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaveStatus('saving');
     try {
-      await fetch('/api/settings', {
+      const res = await fetch('/api/settings', {
         method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(settings)
       });
-      setSaveStatus('success');
-      setTimeout(() => setSaveStatus('idle'), 3000);
+      if (res.ok) {
+        setSaveStatus('success');
+        setTimeout(() => setSaveStatus('idle'), 3000);
+      } else {
+        alert('Failed to save settings');
+        setSaveStatus('idle');
+      }
     } catch (e) {
       alert('Failed to save settings');
     }
@@ -305,13 +336,19 @@ export default function AdminDashboard() {
     const method = editingId ? 'PUT' : 'POST';
     const url = editingId ? `/api/faqs?id=${editingId}` : '/api/faqs';
 
-    await fetch(url, {
+    const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: faqQuestion, answer: faqAnswer, category: faqCategory }),
     });
-    clearForms();
-    fetchData();
+
+    if (res.ok) {
+        clearForms();
+        fetchData();
+    } else {
+        const data = await res.json();
+        alert(`Error: ${data.error || 'Failed to save'}`);
+    }
   };
 
   const setEditCategory = (cat: any) => {
