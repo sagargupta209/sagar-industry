@@ -45,12 +45,7 @@ export default function Home() {
       </section>
 
       {/* ── Best Sellers (Enhanced) ── */}
-      <section className="py-8 md:py-24 bg-gray-50">
-         <div className="container mx-auto px-6 mb-6 md:mb-12 text-center">
-            <span className="text-orange-500 font-bold tracking-widest uppercase text-sm">Customer Favorites</span>
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mt-2 mb-4">Trending Snacks</h2>
-            <div className="w-24 h-1.5 bg-yellow-400 mx-auto rounded-full"></div>
-         </div>
+      <section className="bg-gray-50">
          <CategoryCarousel />
       </section>
 
@@ -72,14 +67,14 @@ export default function Home() {
             >
               {/* Main Image (Top) */}
               <img 
-                src="/images/new/image11.png" 
+                src="/images/new/image11.jpg" 
                 alt="Chaat Papdi" 
                 className="w-full h-auto drop-shadow-[0_35px_35px_rgba(0,0,0,0.3)] relative z-30"
               />
               
               {/* Background Image Left */}
               <motion.img 
-                src="/images/new/image2.png" 
+                src="/images/new/22.jpeg" 
                 className="absolute top-4 -left-12 w-[85%] h-auto opacity-60 blur-[1px] -rotate-12 z-20"
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 0.6, x: 0 }}
@@ -88,7 +83,7 @@ export default function Home() {
 
               {/* Background Image Right */}
               <motion.img 
-                src="/images/new/image3.png" 
+                src="/images/new/3.jpeg" 
                 className="absolute top-4 -right-12 w-[85%] h-auto opacity-60 blur-[1px] rotate-12 z-10"
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 0.6, x: 0 }}

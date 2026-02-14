@@ -79,16 +79,16 @@ const CategoryCarousel = () => {
               name: 'Wafers', 
               desc: 'Simply Salted & Masala Masti',
               bg: 'bg-gradient-to-br from-red-500 to-red-700', 
-              image: 'https://images.unsplash.com/photo-1566478919030-26d9e54179d6?q=80&w=1974', 
-              decor: 'https://images.unsplash.com/photo-1621447504864-284aa8778bf6?q=80&w=1974'
+              image: '/images/new/image1.jpg', 
+              decor: '/images/new/3.jpeg'
             },
             { 
               id: 2, 
               name: 'Namkeen', 
               desc: 'Bhel Mix & Sev Mamra',
               bg: 'bg-gradient-to-br from-orange-400 to-orange-600', 
-              image: 'https://images.unsplash.com/photo-1599488615731-7e5128160cc3?q=80&w=1974', 
-              decor: 'https://images.unsplash.com/photo-1613919113640-25732ec5e61f?q=80&w=2070' 
+              image: '/images/new/66.jpeg', 
+              decor: '/images/new/3.jpeg' 
             }
          ]);
       };
@@ -138,11 +138,11 @@ const CategoryCarousel = () => {
         </div>
 
         {/* Carousel Section */}
-        <motion.div ref={carouselRef} className="cursor-grab active:cursor-grabbing overflow-visible">
+        <motion.div ref={carouselRef} className="cursor-grab active:cursor-grabbing overflow-visible px-4 md:px-0">
             <motion.div 
                drag="x" 
                dragConstraints={{ right: 0, left: -width }} 
-               className="flex space-x-6 md:space-x-10 px-2 pb-12"
+               className="flex space-x-6 md:space-x-10 pb-12"
             >
                 {categories.map((cat, index) => (
                     <motion.div 
