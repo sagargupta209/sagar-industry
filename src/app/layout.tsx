@@ -13,16 +13,23 @@ import dbConnect from "@/lib/mongodb";
 import SiteSettings from "@/models/SiteSettings";
 
 export async function generateMetadata(): Promise<Metadata> {
-  await dbConnect();
-  const settings = await SiteSettings.findOne({});
-  
-  return {
-    title: settings?.metaTitle || "Sagar Industry | Premium Snacks & Namkeens",
-    description: settings?.metaDescription || "Taste the authentic flavors of Gujarat with Sagar Industry's premium range of chips, namkeens, and fryums.",
-    openGraph: {
-      images: settings?.ogImage ? [settings.ogImage] : [],
-    }
-  };
+  try {
+    await dbConnect();
+    const settings = await SiteSettings.findOne({});
+    
+    return {
+      title: settings?.metaTitle || "Sagar Industry | Premium Snacks & Namkeens",
+      description: settings?.metaDescription || "Taste the authentic flavors of Gujarat with Sagar Industry's premium range of chips, namkeens, and fryums.",
+      openGraph: {
+        images: settings?.ogImage ? [settings.ogImage] : [],
+      }
+    };
+  } catch (error) {
+    return {
+      title: "Sagar Industry | Premium Snacks & Namkeens",
+      description: "Taste the authentic flavors of Gujarat with Sagar Industry's premium range of chips, namkeens, and fryums.",
+    };
+  }
 }
 
 import { SettingsProvider } from "@/context/SettingsContext";
