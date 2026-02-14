@@ -224,6 +224,7 @@ export default function AdminDashboard() {
 
     await fetch(url, {
       method,
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: catName, image: catImage }),
     });
     clearForms();
@@ -239,6 +240,7 @@ export default function AdminDashboard() {
 
     await fetch(url, {
       method,
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: prodName, image: prodImage, category: prodCategory }),
     });
     clearForms();
@@ -254,6 +256,7 @@ export default function AdminDashboard() {
 
     await fetch(url, {
         method,
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title: heroTitle, description: heroDesc, image: heroImage }),
     });
     clearForms();
@@ -269,6 +272,7 @@ export default function AdminDashboard() {
 
     await fetch(url, {
         method,
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: testName, review: testReview, role: testRole }),
     });
     clearForms();
@@ -303,6 +307,7 @@ export default function AdminDashboard() {
 
     await fetch(url, {
         method,
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: faqQuestion, answer: faqAnswer, category: faqCategory }),
     });
     clearForms();

@@ -43,19 +43,20 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
-  await dbConnect();
   try {
+    await dbConnect();
     const body = await req.json();
     const slide = await HeroSlide.create(body);
     return NextResponse.json({ success: true, data: slide }, { status: 201 });
   } catch (error) {
+    console.error('API Error:', error);
     return NextResponse.json({ success: false, error: 'Failed to create slide' }, { status: 400 });
   }
 }
 
 export async function PUT(req: Request) {
-  await dbConnect();
   try {
+    await dbConnect();
     const { searchParams } = new URL(req.url);
     const id = searchParams.get('id');
     if (!id) return NextResponse.json({ success: false, error: 'ID required' }, { status: 400 });
@@ -64,13 +65,14 @@ export async function PUT(req: Request) {
     const slide = await HeroSlide.findByIdAndUpdate(id, body, { new: true });
     return NextResponse.json({ success: true, data: slide });
   } catch (error) {
+    console.error('API Error:', error);
     return NextResponse.json({ success: false, error: 'Failed to update slide' }, { status: 400 });
   }
 }
 
 export async function PATCH(req: Request) {
-  await dbConnect();
   try {
+    await dbConnect();
     const { searchParams } = new URL(req.url);
     const id = searchParams.get('id');
     if (!id) return NextResponse.json({ success: false, error: 'ID required' }, { status: 400 });
@@ -79,13 +81,14 @@ export async function PATCH(req: Request) {
     const slide = await HeroSlide.findByIdAndUpdate(id, body, { new: true });
     return NextResponse.json({ success: true, data: slide });
   } catch (error) {
+    console.error('API Error:', error);
     return NextResponse.json({ success: false, error: 'Failed to update slide' }, { status: 400 });
   }
 }
 
 export async function DELETE(req: Request) {
-    await dbConnect();
     try {
+        await dbConnect();
         const { searchParams } = new URL(req.url);
         const id = searchParams.get('id');
         const clearAll = searchParams.get('clearAll') === 'true';
@@ -100,6 +103,7 @@ export async function DELETE(req: Request) {
         await HeroSlide.findByIdAndDelete(id);
         return NextResponse.json({ success: true, message: 'Slide deleted' });
     } catch (error) {
+        console.error('API Error:', error);
         return NextResponse.json({ success: false, error: 'Failed to delete slide' }, { status: 500 });
     }
 }
