@@ -6,6 +6,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SmoothScrolling from "@/components/providers/SmoothScrolling";
 import OfflineIndicator from "@/components/ui/OfflineIndicator";
+import Preloader from "@/components/ui/Preloader";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -69,6 +70,7 @@ export default function RootLayout({
       <body
         className={`${outfit.className} antialiased bg-gray-50 text-gray-900 overflow-x-hidden`}
       >
+        <Preloader />
         <SmoothScrolling>
           <SettingsProvider>
             <script

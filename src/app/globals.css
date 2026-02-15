@@ -16,6 +16,7 @@
   --z-drawer-backdrop: 70;
   --z-drawer: 80;
   --z-overlay: 100;
+  --z-preloader: 9999;
 }
 
 body {
