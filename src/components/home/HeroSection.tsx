@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
+import { HeroSkeleton } from '@/components/ui/Skeletons';
 import useSWR from 'swr';
 import { IHeroSlide } from '@/types';
 
@@ -13,17 +14,19 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const HeroSection = () => {
   const [current, setCurrent] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const { data, error, isLoading, mutate } = useSWR('/api/hero', fetcher);
   
   const slides = data?.success ? data.data : [];
   
   useEffect(() => {
-    if (slides.length === 0) return;
+    setImageLoaded(false);
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
+      setImageLoaded(false);
     }, 5000);
     return () => clearInterval(timer);
-  }, [slides.length]);
+  }, [slides.length, current]);
 
   const slide = slides.length > 0 && slides[current] ? slides[current] : null;
 
@@ -45,7 +48,7 @@ const HeroSection = () => {
   }
 
   if (isLoading || !slide) {
-    return null; 
+    return <HeroSkeleton />; 
   }
 
   return (
@@ -76,6 +79,7 @@ const HeroSection = () => {
                  className="object-cover lg:object-fill"
                  placeholder="blur"
                  blurDataURL={BLUR_DATA_URL}
+                 onLoad={() => setImageLoaded(true)}
                />
              </motion.div>
 
@@ -97,8 +101,16 @@ const HeroSection = () => {
                   className="object-cover object-center"
                   placeholder="blur"
                   blurDataURL={BLUR_DATA_URL}
+                  onLoad={() => setImageLoaded(true)}
                 />
              </motion.div>
+          )}
+
+          {/* Loading Spinner for Image */}
+          {!imageLoaded && (
+            <div className="absolute inset-0 flex items-center justify-center bg-gray-100/50 backdrop-blur-sm z-[var(--z-elevated)]">
+              <div className="w-12 h-12 border-4 border-[#1a237e]/20 border-t-[#1a237e] rounded-full animate-spin" />
+            </div>
           )}
 
           {/* Content Overlay */}
