@@ -1191,6 +1191,20 @@ export default function AdminDashboard() {
                     </div>
                 </div>
 
+                {/* ── Homepage Sections Module ── */}
+                <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100">
+                    <div className="flex items-center gap-3 mb-8">
+                        <div className="bg-yellow-50 p-2.5 rounded-xl text-yellow-600"><LayoutGrid size={20}/></div>
+                        <h3 className="font-extrabold text-xl text-gray-900">Homepage Sections</h3>
+                    </div>
+                    <div className="space-y-5">
+                        <div className="grid grid-cols-2 gap-4">
+                            <InputField label="Trust Badges Title" value={settings.trustBadgesTitle} onChange={(v: string) => handleSettingsChange('trustBadgesTitle', v)} />
+                            <InputField label="Title Accent (Orange Text)" value={settings.trustBadgesTitleAccent} onChange={(v: string) => handleSettingsChange('trustBadgesTitleAccent', v)} />
+                        </div>
+                    </div>
+                </div>
+
                 {/* ── Brand & Legal Module ── */}
                 <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100">
                     <div className="flex items-center gap-3 mb-8">

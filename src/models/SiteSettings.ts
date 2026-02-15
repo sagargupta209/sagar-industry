@@ -38,6 +38,10 @@ const SiteSettingsSchema = new mongoose.Schema({
   statsProducts: { type: String, default: '50+' },
   statsCustomers: { type: String, default: '1M+' },
   statsCities: { type: String, default: '100+' },
+  
+  // homepage sections
+  trustBadgesTitle: { type: String, default: 'Our Quality' },
+  trustBadgesTitleAccent: { type: String, default: 'Uncompromised' },
 
   // SEO
   metaTitle: { type: String, default: 'Sagar Industry' },
