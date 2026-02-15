@@ -59,13 +59,21 @@ const Footer = () => {
           
           {/* Brand & Socials (Left Column) */}
           <div className="lg:w-1/5 flex flex-col items-center lg:items-start text-center lg:text-left">
-             <Link href="/" className="mb-6">
-                  {/* Logo Badge Simulation */}
-                  <div className="bg-[#1a237e] text-yellow-400 p-2 rounded-lg border border-yellow-500 inline-block">
-                     <span className="text-xl font-black uppercase tracking-widest block leading-none">SAGAR</span>
-                     <span className="text-[10px] font-bold bg-green-600 text-white px-1 rounded-sm uppercase tracking-wider block mt-1">Industries</span>
-                 </div>
-            </Link>
+             {(() => {
+                const companyName = settings?.companyName || "SAGAR Industries";
+                const nameParts = companyName.split(' ');
+                const firstName = nameParts[0];
+                const restName = nameParts.slice(1).join(' ');
+                return (
+                  <Link href="/" className="mb-6 block h-20 w-auto">
+                      <img 
+                        src="/logo.png" 
+                        alt={companyName} 
+                        className="h-full w-auto object-contain"
+                      />
+                  </Link>
+                );
+             })()}
             
             <p className="text-gray-400 text-sm mb-6 max-w-xs">
               Delivering the perfect crunch and authentic taste to millions of households since 1995.

@@ -471,9 +471,11 @@ export default function AdminDashboard() {
 
   const SidebarContent = () => (
     <>
-        <div className="text-2xl font-black text-orange-500 mb-8 flex items-center gap-2">
-            <div className="w-10 h-10 bg-orange-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-orange-900/50">S</div>
-            Sagar Admin
+        <div className="text-xl font-black text-white mb-8 flex items-center gap-3">
+            <div className="w-10 h-10 p-1 flex items-center justify-center shrink-0">
+                <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" />
+            </div>
+            <span className="truncate">Sagar Admin</span>
         </div>
         <nav className="space-y-1">
           <SidebarItem id="products" icon={Package} label="Products" />

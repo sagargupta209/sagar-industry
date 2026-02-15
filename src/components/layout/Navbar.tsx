@@ -41,24 +41,54 @@ const Navbar = () => {
     { name: 'Contact', href: '/contact' },
   ];
 
+  const companyName = settings?.companyName || "SAGAR Industries";
+  const nameParts = companyName.split(' ');
+  const firstName = nameParts[0];
+  const restName = nameParts.slice(1).join(' ');
+
   return (
     <>
+      <div className="fixed top-0 left-0 right-0 z-[60] bg-[#1a237e] text-white py-1 md:py-2 text-xs md:text-sm font-medium">
+        <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
+          <div className="flex items-center space-x-4">
+            {settings?.phonePrimary && (
+              <a href={`tel:${settings.phonePrimary}`} className="hover:text-yellow-400 transition flex items-center gap-1">
+                <span>📞</span> {settings.phonePrimary}
+              </a>
+            )}
+            {settings?.emailPrimary && (
+              <a href={`mailto:${settings.emailPrimary}`} className="hidden md:flex hover:text-yellow-400 transition items-center gap-1">
+                <span>✉️</span> {settings.emailPrimary}
+              </a>
+            )}
+          </div>
+          <div className="flex items-center space-x-4">
+             {settings?.whatsapp && (
+               <a href={`https://wa.me/${settings.whatsapp}`} target="_blank" className="hover:text-green-400 transition flex items-center gap-1">
+                 <span className="md:inline hidden">Chat on WhatsApp</span>
+                 <span className="md:hidden inline">💬</span>
+               </a>
+             )}
+          </div>
+        </div>
+      </div>
+
       <nav
         className={clsx(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-300 shadow-md',
+          'fixed top-6 md:top-10 left-0 right-0 z-50 transition-all duration-300 shadow-md',
           'bg-[#FFD700] text-black' // Bright Yellow Background
         )}
       >
         <div className="container mx-auto px-4 md:px-8 h-20 md:h-24 flex justify-between items-center relative">
           
-          {/* Desktop Logo - Overlapping */}
+          {/* Desktop Logo */}
           <div className="hidden md:flex flex-shrink-0 items-start absolute top-0 left-8 z-50">
-             <Link href="/" className="relative group">
-                {/* Logo Badge Simulation */}
-                <div className="bg-[#1a237e] text-yellow-400 p-2 pb-6 pt-4 rounded-b-full shadow-lg border-t-4 border-yellow-500 w-32 h-36 flex flex-col items-center justify-center -mt-2 transition-transform transform group-hover:scale-105">
-                    <span className="text-3xl font-black tracking-widest uppercase mb-1">SAGAR</span>
-                    <span className="text-xs font-bold bg-green-600 text-white px-2 py-0.5 rounded-full uppercase tracking-wider">Industries</span>
-                </div>
+             <Link href="/" className="relative group p-2">
+                <img 
+                  src="/logo.png" 
+                  alt={companyName} 
+                  className="w-32 h-32 object-contain transition-transform transform group-hover:scale-105"
+                />
              </Link>
           </div>
 
@@ -70,9 +100,11 @@ const Navbar = () => {
 
              {/* Centered Logo for Mobile */}
              <Link href="/" className="flex flex-col items-center">
-                <div className="bg-[#1a237e] text-yellow-400 px-3 py-1 rounded-lg border-2 border-yellow-500">
-                    <span className="text-xl font-black uppercase">SAGAR</span>
-                </div>
+                <img 
+                  src="/logo.png" 
+                  alt={companyName} 
+                  className="h-12 w-auto object-contain"
+                />
              </Link>
 
              <div className="flex items-center space-x-3">
