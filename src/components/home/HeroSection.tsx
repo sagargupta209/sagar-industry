@@ -60,24 +60,33 @@ const HeroSection = () => {
           transition={{ duration: 0.8 }}
           className="absolute inset-0 w-full h-full"
         >
-          {/* Desktop Image */}
-          {slide.image && (
-             <Image 
-               src={slide.image} 
-               alt="Hero Background" 
-               fill
-               priority={current === 0}
-               quality={90}
-               sizes="100vw"
-               className="hidden md:block object-cover lg:object-fill"
-               placeholder="blur"
-               blurDataURL={BLUR_DATA_URL}
-             />
-          )}
+             <motion.div
+               className="hidden md:block absolute inset-0 w-full h-full"
+               initial={{ scale: 1.15 }}
+               animate={{ scale: 1 }}
+               transition={{ duration: 10, ease: "easeOut" }}
+             >
+               <Image 
+                 src={slide.image} 
+                 alt="Hero Background" 
+                 fill
+                 priority={current === 0}
+                 quality={90}
+                 sizes="100vw"
+                 className="object-cover lg:object-fill"
+                 placeholder="blur"
+                 blurDataURL={BLUR_DATA_URL}
+               />
+             </motion.div>
 
-          {/* Mobile Image - Using standard img for perfect auto-scaling if needed, or Next Image with cover */}
+          {/* Mobile Image */}
           {(slide.imageMobile || slide.image) && (
-             <div className="block md:hidden relative w-full h-full">
+             <motion.div 
+               className="block md:hidden relative w-full h-full"
+               initial={{ scale: 1.1 }}
+               animate={{ scale: 1 }}
+               transition={{ duration: 8, ease: "easeOut" }}
+             >
                 <Image 
                   src={slide.imageMobile || slide.image} 
                   alt="Hero Background Mobile" 
@@ -89,7 +98,7 @@ const HeroSection = () => {
                   placeholder="blur"
                   blurDataURL={BLUR_DATA_URL}
                 />
-             </div>
+             </motion.div>
           )}
 
           {/* Content Overlay */}

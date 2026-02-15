@@ -8,23 +8,69 @@ const Preloader = () => {
   const [percent, setPercent] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setPercent((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setTimeout(() => setLoading(false), 500);
-          return 100;
-        }
-        return prev + 2;
-      });
-    }, 30);
+    let interval: NodeJS.Timeout;
 
-    // Also listen for absolute window load
-    window.onload = () => {
-        setPercent(100);
+    const startLoading = () => {
+      let currentProgress = 0;
+      interval = setInterval(() => {
+        currentProgress += Math.random() * 5;
+        if (currentProgress >= 90) {
+          clearInterval(interval);
+          setPercent(90);
+        } else {
+          setPercent(Math.floor(currentProgress));
+        }
+      }, 50);
     };
 
-    return () => clearInterval(interval);
+    const finishLoading = () => {
+      clearInterval(interval);
+      setPercent(100);
+      setTimeout(() => setLoading(false), 800);
+    };
+
+    startLoading();
+
+    // Actual Image Preloading Check
+    const checkImages = () => {
+      const imgs = document.querySelectorAll('img');
+      const totalImages = imgs.length;
+      if (totalImages === 0) {
+        finishLoading();
+        return;
+      }
+
+      let loadedCount = 0;
+      imgs.forEach((img) => {
+        if (img.complete) {
+          loadedCount++;
+        } else {
+          img.addEventListener('load', () => {
+            loadedCount++;
+            if (loadedCount === totalImages) finishLoading();
+          });
+          img.addEventListener('error', () => {
+            loadedCount++;
+            if (loadedCount === totalImages) finishLoading();
+          });
+        }
+      });
+
+      if (loadedCount === totalImages) {
+        finishLoading();
+      }
+    };
+
+    // Wait for initial JS execution then check images
+    const timeout = setTimeout(checkImages, 500);
+
+    // Absolute fallback
+    window.onload = finishLoading;
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
   }, []);
 
   return (
