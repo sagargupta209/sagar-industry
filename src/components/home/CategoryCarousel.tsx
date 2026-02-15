@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const defaultStyles = [
   { 
@@ -159,9 +160,11 @@ const CategoryCarousel = () => {
                         <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition duration-500" />
                         
                         {/* Decorative Background Elements */}
-                         <img 
+                         <Image 
                             src={cat.decor} 
-                            className="absolute -top-10 -right-10 w-40 opacity-30 group-hover:opacity-50 group-hover:scale-110 transition duration-700 blur-sm mix-blend-overlay"
+                            width={300}
+                            height={300}
+                            className="absolute -top-10 -right-10 w-40 opacity-30 group-hover:opacity-50 group-hover:scale-110 transition duration-700 blur-sm mix-blend-overlay object-cover"
                              alt="decoration"
                          />
 
@@ -171,7 +174,13 @@ const CategoryCarousel = () => {
                            whileHover={{ scale: 1.15, rotate: -5 }}
                            transition={{ type: "spring", stiffness: 300 }}
                         >
-                            <img src={cat.image} className="w-full drop-shadow-2xl" alt={cat.name} />
+                            <Image 
+                              src={cat.image} 
+                              width={400}
+                              height={400}
+                              className="w-full drop-shadow-2xl object-contain" 
+                              alt={cat.name} 
+                            />
                         </motion.div>
                         
                         {/* Card Footer Info */}

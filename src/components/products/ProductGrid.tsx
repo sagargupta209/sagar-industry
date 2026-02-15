@@ -2,8 +2,10 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { SlidersHorizontal, Grid3X3, LayoutGrid, ChevronDown, X } from 'lucide-react';
+import { SlidersHorizontal, Grid3X3, LayoutGrid, ChevronDown, X, SearchX } from 'lucide-react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
 
 interface Category {
   _id: string;
@@ -26,6 +28,8 @@ interface ProductGridProps {
 
 const PRODUCTS_PER_PAGE = 12;
 
+const BLUR_DATA_URL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
+
 const ProductGrid = ({ products, categories }: ProductGridProps) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [gridCols, setGridCols] = useState<3 | 4>(4);
@@ -35,9 +39,13 @@ const ProductGrid = ({ products, categories }: ProductGridProps) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
+  const [searchQuery, setSearchQuery] = useState('');
+
   // Sync URL param with state
   useEffect(() => {
     const categoryParam = searchParams.get('category');
+    const searchParam = searchParams.get('search');
+
     if (categoryParam) {
       const match = categories.find((c) => c.name.toLowerCase() === categoryParam.toLowerCase());
       if (match) {
@@ -45,6 +53,12 @@ const ProductGrid = ({ products, categories }: ProductGridProps) => {
       }
     } else {
       setSelectedCategory('All');
+    }
+
+    if (searchParam) {
+      setSearchQuery(searchParam);
+    } else {
+      setSearchQuery('');
     }
   }, [searchParams, categories]);
 
@@ -58,16 +72,18 @@ const ProductGrid = ({ products, categories }: ProductGridProps) => {
     } else {
       params.set('category', category);
     }
+    // Keep search param if exists, or maybe clear it? 
+    // Usually changing category might keep search or clear it. Let's keep it for now.
     
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
-
-
   // Filter
-  const filtered = selectedCategory === 'All'
-    ? products
-    : products.filter((p) => p.category?.name === selectedCategory);
+  const filtered = products.filter((p) => {
+    const matchesCategory = selectedCategory === 'All' || p.category?.name === selectedCategory;
+    const matchesSearch = !searchQuery || p.name.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   const visible = filtered.slice(0, visibleCount);
   const hasMore = visibleCount < filtered.length;
@@ -128,6 +144,7 @@ const ProductGrid = ({ products, categories }: ProductGridProps) => {
                   : 'text-gray-400 hover:text-gray-600'
               }`}
               title="3 columns"
+              aria-label="3 columns grid"
             >
               <Grid3X3 size={18} />
             </button>
@@ -139,6 +156,7 @@ const ProductGrid = ({ products, categories }: ProductGridProps) => {
                   : 'text-gray-400 hover:text-gray-600'
               }`}
               title="4 columns"
+              aria-label="4 columns grid"
             >
               <LayoutGrid size={18} />
             </button>
@@ -159,28 +177,34 @@ const ProductGrid = ({ products, categories }: ProductGridProps) => {
               key={product._id}
               className="group bg-white rounded-3xl shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden cursor-pointer border border-gray-100/80"
             >
-              {/* Product Image */}
-              <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 p-6">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-contain transition-transform duration-700 ease-out group-hover:scale-110"
-                />
-                {/* Subtle gradient overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </div>
+              <Link href={`/products/${product._id}`} className="block">
+                {/* Product Image */}
+                <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 p-6">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    className="object-contain p-4 transition-transform duration-700 ease-out group-hover:scale-110"
+                    placeholder="blur"
+                    blurDataURL={BLUR_DATA_URL}
+                  />
+                  {/* Subtle gradient overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                </div>
 
-              {/* Product Info */}
-              <div className="p-5 text-center">
-                {product.category?.name && (
-                  <span className="inline-block text-xs font-semibold text-[#1a237e]/70 uppercase tracking-widest mb-2">
-                    {product.category.name}
-                  </span>
-                )}
-                <h3 className="text-lg font-bold text-gray-900 leading-snug group-hover:text-[#1a237e] transition-colors duration-300">
-                  {product.name}
-                </h3>
-              </div>
+                {/* Product Info */}
+                <div className="p-5 text-center">
+                  {product.category?.name && (
+                    <span className="inline-block text-xs font-semibold text-[#1a237e]/70 uppercase tracking-widest mb-2">
+                      {product.category.name}
+                    </span>
+                  )}
+                  <h3 className="text-lg font-bold text-gray-900 leading-snug group-hover:text-[#1a237e] transition-colors duration-300">
+                    {product.name}
+                  </h3>
+                </div>
+              </Link>
             </motion.div>
           ))}
         </AnimatePresence>
@@ -188,17 +212,42 @@ const ProductGrid = ({ products, categories }: ProductGridProps) => {
 
       {/* ── Empty State ── */}
       {filtered.length === 0 && (
-        <div className="text-center py-20">
-          <div className="text-6xl mb-4">🍿</div>
-          <h3 className="text-2xl font-bold text-gray-700 mb-2">No products found</h3>
-          <p className="text-gray-500 mb-6">Try a different category or clear filters</p>
-          <button
-            onClick={() => updateCategory('All')}
-            className="px-6 py-2.5 bg-[#1a237e] text-white rounded-full font-semibold hover:bg-[#0d1557] transition-colors"
-          >
-            View All Products
-          </button>
-        </div>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center py-24 md:py-32 px-6 bg-white rounded-[3rem] shadow-sm border border-gray-100 max-w-4xl mx-auto"
+        >
+          <div className="relative inline-block mb-8">
+            <div className="w-24 h-24 bg-orange-100 rounded-full flex items-center justify-center animate-bounce-slow">
+              <SearchX size={48} className="text-orange-500" />
+            </div>
+            <div className="absolute -top-2 -right-2 bg-yellow-400 p-2 rounded-full shadow-lg">
+               <span className="text-xl">🍿</span>
+            </div>
+          </div>
+          
+          <h3 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">
+            Aww, no snacks found!
+          </h3>
+          <p className="text-lg text-gray-500 mb-10 max-w-md mx-auto leading-relaxed">
+            We couldn't find any products matching your current filters or search query. Don't worry, the perfect crunch is just a click away!
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button
+              onClick={() => updateCategory('All')}
+              className="px-10 py-4 bg-[#1a237e] text-white rounded-full font-bold hover:bg-[#151b60] transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-xl active:scale-95"
+            >
+              Clear All Filters
+            </button>
+            <button
+              onClick={() => router.back()}
+              className="px-10 py-4 bg-gray-100 text-gray-700 rounded-full font-bold hover:bg-gray-200 transition-all border border-gray-200"
+            >
+              Go Back
+            </button>
+          </div>
+        </motion.div>
       )}
 
       {/* ── Load More ── */}

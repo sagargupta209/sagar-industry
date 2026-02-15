@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Clock, Globe } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Clock, Globe, CheckCircle2 } from 'lucide-react';
+import confetti from 'canvas-confetti';
 
 import { useSettings } from '@/context/SettingsContext';
 
@@ -14,7 +15,8 @@ export default function ContactPage() {
     phone: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
+    honeypot: '' // Spam protection
   });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
@@ -29,7 +31,13 @@ export default function ContactPage() {
       });
       if (res.ok) {
         setStatus('success');
-        setFormData({ firstName: '', lastName: '', phone: '', email: '', subject: '', message: '' });
+        confetti({
+          particleCount: 150,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#1a237e', '#FFD700', '#ea580c']
+        });
+        setFormData({ firstName: '', lastName: '', phone: '', email: '', subject: '', message: '', honeypot: '' });
       } else {
         setStatus('error');
       }
@@ -153,13 +161,24 @@ export default function ContactPage() {
                <form onSubmit={handleSubmit} className="space-y-6">
                   {status === 'success' ? (
                     <motion.div 
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      className="bg-green-50 text-green-700 p-6 rounded-2xl border border-green-100 text-center"
+                      initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      className="bg-green-50 text-green-800 p-10 rounded-[2rem] border border-green-100 text-center flex flex-col items-center"
                     >
-                      <h3 className="font-bold text-lg mb-1">Message Sent!</h3>
-                      <p>Thank you for reaching out. We'll get back to you soon.</p>
-                      <button type="button" onClick={() => setStatus('idle')} className="mt-4 text-sm font-bold underline">Send another message</button>
+                      <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                        <CheckCircle2 size={40} className="text-green-600" />
+                      </div>
+                      <h3 className="text-3xl font-black mb-3">Message Sent!</h3>
+                      <p className="text-lg text-green-700 max-w-sm mx-auto mb-8">
+                        Thank you for reaching out! We've received your query and will get back to you within 24 hours.
+                      </p>
+                      <button 
+                        type="button" 
+                        onClick={() => setStatus('idle')} 
+                        className="bg-green-600 text-white px-8 py-3 rounded-full font-bold hover:bg-green-700 transition shadow-lg hover:shadow-xl"
+                      >
+                        Send Another Message
+                      </button>
                     </motion.div>
                   ) : (
                     <>
@@ -233,6 +252,16 @@ export default function ContactPage() {
                           placeholder="How can we help you today?" 
                           value={formData.message}
                           onChange={(e) => setFormData({...formData, message: e.target.value})}
+                        />
+                      </div>
+
+                      {/* Honeypot Field (Hidden) */}
+                      <div className="hidden">
+                        <input 
+                          type="text" 
+                          autoComplete="off"
+                          value={formData.honeypot}
+                          onChange={(e) => setFormData({...formData, honeypot: e.target.value})}
                         />
                       </div>
 

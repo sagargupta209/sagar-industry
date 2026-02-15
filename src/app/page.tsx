@@ -3,15 +3,27 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Star, ArrowRight, Truck, ShieldCheck, Leaf } from 'lucide-react';
+import { ITestimonial } from '@/types';
+import useSWR from 'swr';
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+const MotionImage = motion(Image);
+
+import { useSettings } from '@/context/SettingsContext';
 
 import HeroSection from '@/components/home/HeroSection';
 import CategoryCarousel from '@/components/home/CategoryCarousel';
 import DistributorCTA from '@/components/home/DistributorCTA';
 import TechSection from '@/components/home/TechSection';
 import ContactSection from '@/components/home/ContactSection';
+import { ProductSkeleton, TestimonialSkeleton } from '@/components/ui/Skeletons';
+import confetti from 'canvas-confetti';
 
 export default function Home() {
+  const { settings } = useSettings();
   const features = [
     { icon: <Leaf className="text-green-500" />, title: '100% Natural', desc: 'No artificial preservatives, just pure taste.' },
     { icon: <ShieldCheck className="text-blue-500" />, title: 'Quality Assured', desc: 'Hygiene standards that exceed expectations.' },
@@ -23,8 +35,8 @@ export default function Home() {
       <HeroSection />
 
       {/* ── Features Bar ── */}
-      <section className="hidden md:block bg-[#1a237e] text-white py-12 md:py-16 relative overflow-hidden -mt-2 z-20 rounded-b-[2rem] shadow-xl">
-         <div className="container mx-auto px-6 grid md:grid-cols-3 gap-8 text-center relative z-10">
+      <section className="bg-[#1a237e] text-white py-8 md:py-16 relative overflow-hidden -mt-2 z-[var(--z-content)] rounded-b-[2rem] shadow-xl">
+         <div className="container mx-auto px-2 md:px-6 grid grid-cols-3 gap-2 md:gap-8 text-center relative z-10">
             {features.map((f, i) => (
               <motion.div 
                 key={i}
@@ -32,11 +44,11 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.2 }}
-                className="flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-white/5 transition-colors"
+                className="flex flex-col items-center gap-2 p-1 md:p-4 rounded-xl hover:bg-white/5 transition-colors relative"
               >
-                 <div className="bg-white p-3 rounded-full shadow-lg">{f.icon}</div>
-                 <h3 className="font-bold text-xl">{f.title}</h3>
-                 <p className="text-blue-100 text-sm md:text-base">{f.desc}</p>
+                 <div className="bg-white p-2 md:p-3 rounded-full shadow-lg scale-75 md:scale-100">{f.icon}</div>
+                 <h3 className="font-bold text-[10px] md:text-xl leading-tight">{f.title}</h3>
+                 <p className="text-blue-100 text-[8px] md:text-base opacity-80 md:opacity-100 line-clamp-2 md:line-clamp-none">{f.desc}</p>
               </motion.div>
             ))}
          </div>
@@ -68,28 +80,36 @@ export default function Home() {
             <motion.div 
               animate={{ y: [0, -15, 0] }}
               transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-              className="relative w-full max-w-md"
+              className="relative w-full max-w-md px-8 md:px-0"
             >
               {/* Main Image (Top) */}
-              <img 
+              <Image 
                 src="/images/new/image11.png" 
                 alt="Chaat Papdi" 
-                className="w-full h-auto drop-shadow-[0_35px_35px_rgba(0,0,0,0.3)] relative z-30"
+                width={500}
+                height={500}
+                className="w-full h-auto drop-shadow-[0_35px_35px_rgba(0,0,0,0.3)] relative z-[var(--z-hero-nav)]"
               />
               
               {/* Background Image Left */}
-              <motion.img 
+              <MotionImage 
                 src="/images/new/image2.png" 
-                className="absolute top-4 -left-12 w-[85%] h-auto opacity-60 blur-[1px] -rotate-12 z-20"
+                alt="Decorative Snack"
+                width={400}
+                height={400}
+                className="absolute top-4 left-0 md:-left-12 w-[35%] md:w-[85%] h-auto opacity-60 blur-[1px] -rotate-12 z-[var(--z-content)]"
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 0.6, x: 0 }}
                 transition={{ delay: 0.4 }}
               />
 
               {/* Background Image Right */}
-              <motion.img 
+              <MotionImage 
                 src="/images/new/image3.png" 
-                className="absolute top-4 -right-12 w-[85%] h-auto opacity-60 blur-[1px] rotate-12 z-10"
+                alt="Decorative Snack"
+                width={400}
+                height={400}
+                className="absolute top-4 right-0 md:-right-12 w-[35%] md:w-[85%] h-auto opacity-60 blur-[1px] rotate-12 z-[var(--z-elevated)]"
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 0.6, x: 0 }}
                 transition={{ delay: 0.5 }}
@@ -97,8 +117,8 @@ export default function Home() {
             </motion.div>
             
             {/* Floating Badge */}
-            <div className="absolute -bottom-4 -right-4 bg-white p-6 rounded-2xl shadow-xl flex items-center gap-4 animate-bounce-slow hidden md:flex z-40">
-               <div className="bg-yellow-400 p-3 rounded-full text-[#1a237e] font-bold text-xl">25+</div>
+            <div className="absolute -bottom-4 -right-4 bg-white p-6 rounded-2xl shadow-xl flex items-center gap-4 animate-bounce-slow hidden md:flex z-[var(--z-floating)]">
+               <div className="bg-yellow-400 p-3 rounded-full text-[#1a237e] font-bold text-xl">{settings?.statsExperience || '25+'}</div>
                <div className="text-sm font-bold text-gray-600">Years of<br/>Excellence</div>
             </div>
           </motion.div>
@@ -140,47 +160,45 @@ export default function Home() {
 }
 
 const TestimonialsSection = () => {
-  const [testimonials, setTestimonials] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data, error, isLoading, mutate } = useSWR('/api/testimonials', fetcher);
+  
+  const testimonials: ITestimonial[] = data?.success && data.data && data.data.length > 0 
+    ? data.data 
+    : [
+        { _id: '1', name: 'Happy Customer', review: 'Absolutely love the flavors! The Tomato Twist chips are my go-to snack for movie nights.', role: 'Verified Buyer', rating: 5 },
+        { _id: '2', name: 'Snack Lover', review: 'Great quality and hygiene. My kids love the namkeens.', role: 'Regular Customer', rating: 5 },
+        { _id: '3', name: 'Distributor', review: 'Best products in the market with amazing margins. Highly recommended.', role: 'Partner', rating: 5 }
+      ];
 
-  useEffect(() => {
-    const fetchTestimonials = async () => {
-      const useFallback = () => {
-        setTestimonials([
-          { _id: '1', name: 'Happy Customer', review: 'Absolutely love the flavors! The Tomato Twist chips are my go-to snack for movie nights.', role: 'Verified Buyer', rating: 5 },
-          { _id: '2', name: 'Snack Lover', review: 'Great quality and hygiene. My kids love the namkeens.', role: 'Regular Customer', rating: 5 },
-          { _id: '3', name: 'Distributor', review: 'Best products in the market with amazing margins. Highly recommended.', role: 'Partner', rating: 5 }
-        ]);
-      };
+  if (isLoading) {
+    return (
+      <section className="py-16 md:py-24 bg-[#FFF8E1]">
+         <div className="container mx-auto px-6">
+            <div className="grid md:grid-cols-3 gap-8">
+               {[...Array(3)].map((_, i) => (
+                 <TestimonialSkeleton key={i} />
+               ))}
+            </div>
+         </div>
+      </section>
+    );
+  }
 
-      try {
-        const res = await fetch('/api/testimonials');
-        if (!res.ok) {
-          console.warn(`Failed to fetch testimonials: ${res.status} ${res.statusText}`);
-          useFallback();
-          return;
-        }
-        const contentType = res.headers.get("content-type");
-        if (!contentType || !contentType.includes("application/json")) {
-           console.warn("Received non-JSON response from /api/testimonials");
-           useFallback();
-           return;
-        }
-        const data = await res.json();
-        if (data.success && data.data && data.data.length > 0) {
-          setTestimonials(data.data);
-        } else {
-          useFallback();
-        }
-      } catch (error) {
-         console.warn("Failed to fetch testimonials", error);
-         useFallback();
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchTestimonials();
-  }, []);
+  if (error) {
+    return (
+      <section className="py-16 bg-white text-center">
+        <div className="container mx-auto px-6">
+           <p className="text-red-500 font-bold mb-4">Unable to load testimonials at this moment.</p>
+           <button 
+             onClick={() => mutate()}
+             className="px-6 py-2 bg-yellow-400 text-[#1a237e] font-bold rounded-full hover:bg-yellow-500 transition-all"
+           >
+             Try Again
+           </button>
+        </div>
+      </section>
+    );
+  }
 
   return (
       <section className="py-16 md:py-24 bg-[#FFF8E1]">
@@ -190,7 +208,7 @@ const TestimonialsSection = () => {
          </div>
          
          <div className="container mx-auto px-6 grid md:grid-cols-3 gap-8">
-            {testimonials.map((t, i) => (
+            {testimonials.map((t: ITestimonial, i: number) => (
               <motion.div 
                 key={t._id || i}
                 initial={{ opacity: 0, y: 30 }}
