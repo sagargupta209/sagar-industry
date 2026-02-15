@@ -46,7 +46,7 @@ export default function DistributorPage() {
                 Become a <span className="text-yellow-400">Distributor</span>
               </h1>
               <p className="text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
-                Partner with Sagar Industries and bring the authentic taste of premium snacks to your region. Let's grow together!
+                <span className="font-bold text-white uppercase tracking-wider">Sagar Industry & Sai Food Product</span> is a leading brand with a range of <span className="text-yellow-300 font-semibold">Snacks, Rusks, Cream Roll and Bakery items</span>. Become part of our family and help us spread deliciousness across India.
               </p>
             </motion.div>
          </div>
@@ -64,19 +64,35 @@ export default function DistributorPage() {
                className="space-y-6"
             >
                <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6">Why Partner With Us?</h3>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6">Our Strong Presence</h3>
                   <div className="space-y-8">
-                    {benefits.map((benefit, index) => (
-                      <div key={index} className="flex gap-4">
-                        <div className="flex-shrink-0 w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center">
-                          {benefit.icon}
-                        </div>
-                        <div>
-                          <h4 className="text-lg font-bold text-gray-900">{benefit.title}</h4>
-                          <p className="text-gray-600 text-sm leading-relaxed mt-1">{benefit.description}</p>
-                        </div>
+                    <div className="flex gap-4">
+                      <div className="flex-shrink-0 w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center">
+                        <TrendingUp className="w-8 h-8 text-green-600" />
                       </div>
-                    ))}
+                      <div>
+                        <h4 className="text-lg font-bold text-gray-900">National Growth</h4>
+                        <p className="text-gray-600 text-sm leading-relaxed mt-1">Established in 2005, we are currently making progressive efforts to establish footprints in the whole country.</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-4">
+                      <div className="flex-shrink-0 w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center">
+                        <ShieldCheck className="w-8 h-8 text-blue-600" />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-bold text-gray-900">Quality Assurance</h4>
+                        <p className="text-gray-600 text-sm leading-relaxed mt-1">We source only the finest ingredients, and our products are prepared with love and care following traditional recipes.</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-4">
+                      <div className="flex-shrink-0 w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center">
+                        <Briefcase className="w-8 h-8 text-yellow-600" />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-bold text-gray-900">Legacy of Manufacturing</h4>
+                        <p className="text-gray-600 text-sm leading-relaxed mt-1">From last two decades, company has legacy of manufacturing Snack, Biscuits, Rusks, Cookies and Cream Roll.</p>
+                      </div>
+                    </div>
                   </div>
                </div>
 

@@ -16,7 +16,7 @@ const ContactSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="bg-[#EDD719] rounded-[40px] shadow-2xl px-6 py-8 md:px-10 md:py-8 flex flex-col md:flex-row md:items-stretch items-center relative z-10 max-w-5xl mx-auto"
+          className="bg-[#EDD719] rounded-[40px] shadow-2xl px-6 pt-8 pb-3 md:px-10 md:py-8 flex flex-col md:flex-row md:items-stretch items-center relative z-10 max-w-5xl mx-auto"
         >
           
           {/* Left Content */}
@@ -29,7 +29,7 @@ const ContactSection = () => {
             >
               Contact Us
             </motion.h2>
-
+ 
             <div className="space-y-4 md:space-y-3 bg-white/10 md:bg-transparent p-4 md:p-0 rounded-2xl md:rounded-none backdrop-blur-sm md:backdrop-blur-none border border-white/20 md:border-none">
               <div className="text-center md:text-left">
                 <h3 className="text-lg md:text-xl font-bold mb-1">{settings?.companyName || 'Sagar Industries Private Limited'}</h3>
@@ -39,9 +39,9 @@ const ContactSection = () => {
                   {settings?.addressCity || 'Lodhika, Rajkot'} - {settings?.addressPincode || '360021'}, {settings?.addressState || 'Gujarat (India)'}.
                 </p>
               </div>
-
+ 
               <div className="w-full h-[1px] bg-black/10 my-2" />
-
+ 
               <div className="text-center md:text-left">
                 <p className="font-bold text-base md:text-lg mb-1">Phone :</p>
                 <p className="font-medium opacity-90 text-sm md:text-base">{settings?.phonePrimary || '+91-281-2783755 / 56'}</p>
@@ -49,9 +49,9 @@ const ContactSection = () => {
                   <p className="font-medium opacity-90 text-sm md:text-base">{settings.phoneSecondary}</p>
                 )}
               </div>
-
+ 
               <div className="w-full h-[1px] bg-black/10 my-2" />
-
+ 
               <div className="text-center md:text-left">
                 <p className="font-bold text-base md:text-lg mb-1">E-mail :</p>
                 <a href={`mailto:${settings?.emailPrimary || 'contact@sagarindustry.com'}`} className="font-medium opacity-90 hover:opacity-100 underline decoration-1 text-sm md:text-base break-all">
@@ -60,9 +60,9 @@ const ContactSection = () => {
               </div>
             </div>
           </div>
-
+ 
           {/* Right Content - Floating Product Images */}
-          <div className="w-full md:w-1/2 relative h-[250px] md:h-auto flex items-center justify-center md:justify-end mt-8 md:mt-0">
+          <div className="w-full md:w-1/2 relative h-[200px] md:h-auto flex items-center justify-center md:justify-end mt-1 md:mt-0">
              <motion.img
                src="/images/new/image2.png" 
                alt="Spicy Chips"
@@ -70,9 +70,9 @@ const ContactSection = () => {
                whileInView={{ rotate: -12, x: 0, opacity: 1 }}
                viewport={{ once: true }}
                transition={{ delay: 0.4, duration: 0.8, type: "spring" }}
-               className="absolute w-48 md:w-[350px] lg:w-[420px] drop-shadow-2xl z-10 left-0 md:-left-[40px] md:-top-[80px] top-4 md:top-auto"
+               className="absolute w-56 md:w-[350px] lg:w-[420px] drop-shadow-2xl z-10 left-0 md:-left-[40px] md:-top-[80px] top-0 md:top-auto"
              />
-
+ 
              <motion.img
                src="/images/new/image3.png" 
                alt="Cream Onion"
@@ -80,7 +80,7 @@ const ContactSection = () => {
                whileInView={{ rotate: 12, x: 0, opacity: 1 }}
                viewport={{ once: true }}
                transition={{ delay: 0.6, duration: 0.8, type: "spring" }}
-               className="absolute w-52 md:w-[380px] lg:w-[450px] drop-shadow-2xl z-20 right-0 md:left-[120px] md:-top-[40px] bottom-4 md:bottom-auto"
+               className="absolute w-64 md:w-[380px] lg:w-[450px] drop-shadow-2xl z-20 right-[2%] md:left-[120px] md:-top-[40px] bottom-0 md:bottom-auto"
              />
           </div>
 

@@ -16,11 +16,9 @@ const TechSection = () => {
                whileInView={{ opacity: 1, scale: 1 }}
                viewport={{ once: true }}
                transition={{ duration: 0.6 }}
-               className="text-4xl md:text-6xl font-black text-[#1a0505] leading-[1.1] tracking-tight"
+               className="text-4xl md:text-6xl font-black text-[#1a0505] leading-[1.2] md:leading-[1.1] tracking-tight"
              >
-               The tech <br/>
-               behind <br/>
-               the taste
+               The tech <br className="hidden md:block" /> behind <br /> the taste
              </motion.h2>
           </div>
 

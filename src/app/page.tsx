@@ -58,11 +58,7 @@ export default function Home() {
 
       {/* ── Best Sellers (Enhanced) ── */}
       <section className="py-8 md:py-24 bg-gray-50">
-         <div className="container mx-auto px-6 mb-6 md:mb-12 text-center">
-            <span className="text-orange-500 font-bold tracking-widest uppercase text-sm">Customer Favorites</span>
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mt-2 mb-4">Trending Snacks</h2>
-            <div className="w-24 h-1.5 bg-yellow-400 mx-auto rounded-full"></div>
-         </div>
+
          <CategoryCarousel />
       </section>
 
@@ -131,13 +127,13 @@ export default function Home() {
           >
             <h4 className="text-[#1a237e] font-bold uppercase tracking-widest mb-2 text-sm md:text-base">Our Heritage</h4>
             <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 leading-tight">
-              The Taste of <span className="text-orange-500">Tradition</span>
+              Quality is our <br className="md:hidden" /> <span className="text-orange-500">Cornerstone</span>
             </h2>
             <p className="text-lg md:text-xl text-gray-600 mb-6 leading-relaxed">
-              At Sagar Industry, we believe that great snacks start with great ingredients. Our journey began with a simple mission: to bring authentic Indian flavors to every household. 
+              Established in <span className="font-bold text-gray-900">2005</span>, <span className="font-bold text-[#1a237e]">Sagar Industry & Sai Food Product</span> has a legacy of over two decades in manufacturing snacks and delicious bakery items. What started in Rajkot is now expanding footprints across the entire country.
             </p>
             <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
-              Using state-of-the-art technology and traditional recipes, we ensure that every packet of chips or namkeen delivers the perfect crunch and taste.
+              From <span className="italic font-medium">Crunchy Snacks</span> to a premium range of <span className="font-bold">Biscuits, Rusks, Cookies, and Cream Rolls</span>, we ensure every bite is a burst of flavor, prepared under the most hygienic conditions and international standards.
             </p>
             
             <Link href="/about" className="inline-flex items-center gap-2 px-8 py-4 bg-[#1a237e] text-white font-bold rounded-full shadow-lg hover:bg-[#151b60] hover:shadow-xl transition-all group">
@@ -203,7 +199,7 @@ const TestimonialsSection = () => {
   return (
       <section className="py-16 md:py-24 bg-[#FFF8E1]">
          <div className="container mx-auto px-6 text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">What Snack Lovers Say</h2>
+            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">What Snack <br className="md:hidden" /> Lovers Say</h2>
             <p className="text-gray-600 max-w-2xl mx-auto text-lg">Don't just take our word for it. Here is what our customers have to say about the crunch.</p>
          </div>
          

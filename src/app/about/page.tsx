@@ -8,7 +8,7 @@ export default function AboutPage() {
   const { settings } = useSettings();
   
   const stats = [
-    { label: 'Years of Experience', value: settings?.statsExperience || '25+' },
+    { label: 'Years of Experience', value: settings?.statsExperience || '20+' },
     { label: 'Products', value: settings?.statsProducts || '50+' },
     { label: 'Happy Customers', value: settings?.statsCustomers || '1M+' },
     { label: 'Cities Covered', value: settings?.statsCities || '100+' },
@@ -18,19 +18,19 @@ export default function AboutPage() {
     {
       icon: <Target className="w-8 h-8 text-blue-600" />,
       title: 'Our Mission',
-      description: 'To deliver the freshest and tastiest snacks to every household in India, ensuring happiness in every bite.',
+      description: 'To spread deliciousness across India by manufacturing snacks and bakery items following traditional recipes and highest quality standards.',
       color: 'bg-blue-50 border-blue-200'
     },
     {
       icon: <Eye className="w-8 h-8 text-green-600" />,
       title: 'Our Vision',
-      description: 'To become a global leader in the snack industry, recognized for quality, innovation, and customer satisfaction.',
+      description: 'To establish footprints across the entire country for Sagar Industry and Sai Food Product, becoming the leading choice for packaged food.',
       color: 'bg-green-50 border-green-200'
     },
     {
       icon: <Heart className="w-8 h-8 text-red-600" />,
-      title: 'Our Values',
-      description: 'Quality, Integrity, Innovation, and Customer Delight are at the heart of everything we do.',
+      title: 'Quality Cornerstone',
+      description: 'At Sagar Industry, quality is our cornerstone. We source the finest ingredients and monitor every step for your peace of mind.',
       color: 'bg-red-50 border-red-200'
     }
   ];
@@ -52,13 +52,13 @@ export default function AboutPage() {
             transition={{ duration: 0.8 }}
           >
             <span className="inline-block py-1 px-3 rounded-full bg-yellow-400/20 text-yellow-300 text-sm font-bold tracking-wider uppercase mb-6 border border-yellow-400/40">
-              Since 1998
+              Established 2005
             </span>
             <h1 className="text-5xl md:text-7xl font-extrabold mb-8 leading-tight">
-              Crafting <span className="text-[#FFD700]">Happiness,</span> <br /> One Crunch at a Time.
+              Sagar Industry & <br /> <span className="text-[#FFD700]">Sai Food Product</span>
             </h1>
             <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
-              Sagar Industry is more than just a snack brand; it's a legacy of authentic flavors, premium quality, and the joy of sharing good food.
+              A legacy of manufacturing snacks and delicious bakery items with a commitment to quality and hygiene since 2005.
             </p>
           </motion.div>
         </div>
@@ -110,8 +110,8 @@ export default function AboutPage() {
                     <Award className="w-8 h-8 text-[#1a237e]" />
                   </div>
                   <div>
-                    <div className="font-bold text-[#1a237e] text-lg">Award Winning</div>
-                    <div className="text-[#1a237e]/80 text-sm">Taste & Quality</div>
+                    <div className="font-bold text-[#1a237e] text-lg">Quality Certified</div>
+                    <div className="text-[#1a237e]/80 text-sm">Cornerstone of Excellence</div>
                   </div>
                 </div>
               </div>
@@ -124,28 +124,31 @@ export default function AboutPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h4 className="text-[#1a237e] font-bold uppercase tracking-widest mb-4">Our Journey</h4>
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                From Humble Beginnings to a <span className="text-green-600">Flavor Revolution.</span>
+              <h4 className="text-[#1a237e] font-bold uppercase tracking-widest mb-4">Our Legacy</h4>
+              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight text-left">
+                A Legacy of Quality, <span className="text-orange-500">Since 2005.</span>
               </h2>
-              <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
+              <div className="space-y-6 text-lg text-gray-600 leading-relaxed text-left">
                 <p>
-                  Founded in <span className="font-bold text-gray-900">2025</span>, Sagar Industry started as a small vision in the heart of Rajkot, Gujarat. Inspired by the rich culinary heritage of India, we set out on a mission to bring authentic, high-quality snacks to modern families.
+                  Established in <span className="font-bold text-gray-900">2005</span>, <span className="font-bold text-[#1a237e]">Sagar Industry and Sai Food Product</span> emerged as a premier packaged food company in Rajkot. Founded by the visionary <span className="font-bold text-gray-900">Late Shri Gurmuk Das Motlani ji</span>, our unit has been a symbol of quality and trust for nearly two decades.
                 </p>
                 <p>
-                  What began as a small family-owned unit has now grown into a <span className="font-bold text-gray-900">leading FMCG powerhouse</span>. We believe that great taste starts with great ingredients, which is why we partner directly with farmers to source the finest potatoes and spices.
+                  Our legacy is defined by a deep-rooted commitment to manufacturing the finest <span className="text-gray-900 font-semibold">Snacks, Delicious Biscuits, Rusks, Cookies, and Cream Rolls</span>. From a localized presence, we have grown into a brand with a strong national footprint, constantly making progressive efforts to establish our mark across the entire country.
                 </p>
                 <p>
-                  Today, our state-of-the-art facility combines traditional recipes with modern hygiene standards, ensuring that every packet you open delivers the perfect crunch and smile.
+                  At our well-equipped facilities, manufacturing is executed in <span className="italic">environmentally friendly premises under the most hygienic conditions</span>. We combine traditional recipes passed down through generations with modern technology to ensure a burst of flavor and goodness in every bite.
                 </p>
               </div>
               
-              <div className="mt-10 flex gap-4">
+              <div className="mt-10 flex flex-wrap gap-6">
                  <div className="flex items-center gap-2 text-gray-700 font-semibold">
-                    <CheckCircle className="text-green-500 w-5 h-5" /> 100% Quality
+                    <CheckCircle className="text-green-500 w-5 h-5" /> 100% Hygienic
                  </div>
                  <div className="flex items-center gap-2 text-gray-700 font-semibold">
-                    <CheckCircle className="text-green-500 w-5 h-5" /> Authentic Taste
+                    <CheckCircle className="text-green-500 w-5 h-5" /> Premium Ingredients
+                 </div>
+                 <div className="flex items-center gap-2 text-gray-700 font-semibold">
+                    <CheckCircle className="text-green-500 w-5 h-5" /> Heritage of 2005
                  </div>
               </div>
             </motion.div>
@@ -153,8 +156,42 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Mission, Vision & Values ── */}
+      {/* ── Quality Section ── */}
       <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">Quality Assurance</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">At Sagar Industry, quality is our cornerstone. We monitor every step to ensure your complete peace of mind.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center text-left">
+            <div className="space-y-8">
+              <div className="bg-white p-8 rounded-3xl shadow-lg border-l-8 border-orange-500">
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Meticulous Monitoring</h3>
+                <p className="text-gray-600 leading-relaxed text-lg">
+                  Our state-of-the-art facilities are staffed by a team of skilled professionals who meticulously monitor every step of the production process. From ingredient sourcing to final packaging, nothing is left to chance.
+                </p>
+              </div>
+              <div className="bg-white p-8 rounded-3xl shadow-lg border-l-8 border-green-500">
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Prepared with Love</h3>
+                <p className="text-gray-600 leading-relaxed text-lg">
+                  Every product that bears the Sagar Industry name has met the highest quality standards. Our snacks and bakery items are prepared with love and care, ensuring a burst of flavor and goodness.
+                </p>
+              </div>
+            </div>
+            <div className="relative mt-8 md:mt-0 px-4 md:px-0">
+               <img src="https://images.unsplash.com/photo-1590069230002-70cc83bf107c?q=80&w=2070" className="rounded-[40px] shadow-2xl w-full object-cover" alt="Quality Control" />
+               <div className="hidden md:block absolute md:-top-10 md:-left-10 bg-[#1a237e] text-white p-8 rounded-3xl shadow-2xl border-4 border-white z-10">
+                  <span className="text-3xl md:text-5xl font-black">2005</span><br/>
+                  <span className="text-xs md:text-sm font-bold uppercase tracking-widest opacity-90">Since Year</span>
+               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Mission, Vision & Values ── */}
+      <section className="py-20">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Guiding Principles</h2>
@@ -193,22 +230,22 @@ export default function AboutPage() {
             </div>
             
             <div className="relative z-10 max-w-4xl mx-auto">
-                <h2 className="text-3xl md:text-5xl font-bold mb-8">Why People Love Sagar Snacks?</h2>
+                <h2 className="text-3xl md:text-5xl font-bold mb-8">Why People Love Sagar Industry?</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
                     <div className="p-6 bg-white/10 rounded-2xl backdrop-blur-sm">
                         <Leaf className="w-10 h-10 text-green-400 mx-auto mb-4" />
-                        <h4 className="font-bold text-xl mb-2">Natural Ingredients</h4>
-                        <p className="text-white/70">No artificial preservatives, just pure flavor.</p>
+                        <h4 className="font-bold text-xl mb-2">Hygienic conditions</h4>
+                        <p className="text-white/70">Most hygienic conditions for manufacturing.</p>
                     </div>
                     <div className="p-6 bg-white/10 rounded-2xl backdrop-blur-sm">
                         <Users className="w-10 h-10 text-yellow-400 mx-auto mb-4" />
-                        <h4 className="font-bold text-xl mb-2">Community First</h4>
-                        <p className="text-white/70">Supporting local farmers and sustainable practices.</p>
+                        <h4 className="font-bold text-xl mb-2">Progressive Efforts</h4>
+                        <p className="text-white/70">Establishing footprints in the whole country.</p>
                     </div>
                     <div className="p-6 bg-white/10 rounded-2xl backdrop-blur-sm">
                         <Globe className="w-10 h-10 text-blue-300 mx-auto mb-4" />
-                        <h4 className="font-bold text-xl mb-2">Global Standards</h4>
-                        <p className="text-white/70">World-class manufacturing for safety & hygiene.</p>
+                        <h4 className="font-bold text-xl mb-2">Modern Technology</h4>
+                        <p className="text-white/70">State-of-the-art facilities with latest technology.</p>
                     </div>
                 </div>
             </div>

@@ -20,13 +20,23 @@ const HeroSection = () => {
   const slides = data?.success ? data.data : [];
   
   useEffect(() => {
-    setImageLoaded(false);
+    // Preload next image to avoid flicker
+    if (slides.length > 0) {
+      slides.forEach((s: any) => {
+        const img = new (window as any).Image();
+        img.src = s.image;
+        if (s.imageMobile) {
+          const imgMobile = new (window as any).Image();
+          imgMobile.src = s.imageMobile;
+        }
+      });
+    }
+
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
-      setImageLoaded(false);
     }, 5000);
     return () => clearInterval(timer);
-  }, [slides.length, current]);
+  }, [slides.length]);
 
   const slide = slides.length > 0 && slides[current] ? slides[current] : null;
 
@@ -69,18 +79,18 @@ const HeroSection = () => {
                animate={{ scale: 1 }}
                transition={{ duration: 10, ease: "easeOut" }}
              >
-               <Image 
-                 src={slide.image} 
-                 alt="Hero Background" 
-                 fill
-                 priority={current === 0}
-                 quality={90}
-                 sizes="100vw"
-                 className="object-cover lg:object-fill"
-                 placeholder="blur"
-                 blurDataURL={BLUR_DATA_URL}
-                 onLoad={() => setImageLoaded(true)}
-               />
+                <Image 
+                  src={slide.image} 
+                  alt="Hero Background" 
+                  fill
+                  priority
+                  quality={90}
+                  sizes="100vw"
+                  className="object-cover lg:object-fill"
+                  placeholder="blur"
+                  blurDataURL={BLUR_DATA_URL}
+                  onLoad={() => setImageLoaded(true)}
+                />
              </motion.div>
 
           {/* Mobile Image */}
@@ -104,13 +114,6 @@ const HeroSection = () => {
                   onLoad={() => setImageLoaded(true)}
                 />
              </motion.div>
-          )}
-
-          {/* Loading Spinner for Image */}
-          {!imageLoaded && (
-            <div className="absolute inset-0 flex items-center justify-center bg-gray-100/50 backdrop-blur-sm z-[var(--z-elevated)]">
-              <div className="w-12 h-12 border-4 border-[#1a237e]/20 border-t-[#1a237e] rounded-full animate-spin" />
-            </div>
           )}
 
           {/* Content Overlay */}

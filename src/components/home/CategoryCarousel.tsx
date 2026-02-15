@@ -108,13 +108,13 @@ const CategoryCarousel = () => {
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="text-4xl md:text-6xl font-black text-[#1a0505] leading-tight"
+                className="text-4xl md:text-6xl font-black text-[#1a0505] leading-tight text-center md:text-left"
               >
                 Binge on our <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600 relative">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600 relative inline-block">
                     bestsellers!
                     {/* Decorative accent marks */}
-                    <svg className="absolute -top-6 -right-8 w-12 h-12 text-green-500" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="8">
+                    <svg className="absolute -top-7 -right-6 md:-right-8 w-10 h-10 md:w-12 md:h-12 text-green-500" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="8">
                         <path d="M20 80 L40 40 L60 70" />
                         <path d="M50 30 L60 10" />
                         <path d="M70 40 L90 20" />
