@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { Menu, X, Search, User, ShoppingCart, ChevronDown, ChevronRight } from 'lucide-react';
 import { useDebounce } from 'use-debounce';
@@ -99,9 +100,12 @@ const Navbar = () => {
           {/* Desktop Logo */}
           <div className="hidden md:flex flex-shrink-0 items-start absolute top-0 left-8 z-50">
              <Link href="/" className="relative group p-2">
-                <img 
+                <Image 
                   src="/logo.png" 
                   alt={companyName} 
+                  width={128}
+                  height={128}
+                  priority
                   className="w-32 h-32 object-contain transition-transform transform group-hover:scale-105"
                 />
              </Link>
@@ -119,9 +123,12 @@ const Navbar = () => {
 
              {/* Centered Logo for Mobile */}
              <Link href="/" className="flex flex-col items-center">
-                <img 
+                <Image 
                   src="/logo.png" 
                   alt={companyName} 
+                  width={48}
+                  height={48}
+                  priority
                   className="h-12 w-auto object-contain"
                 />
              </Link>

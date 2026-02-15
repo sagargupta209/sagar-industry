@@ -24,9 +24,9 @@ export default function ShopHero() {
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 md:pt-36 pb-16 sm:pb-20 md:pb-24">
-        {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-white/80 text-sm font-medium mb-10 md:mb-14">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-32 md:pt-36 pb-16 sm:pb-20 md:pb-24">
+        {/* Breadcrumb - Centered on Mobile, Start on Desktop */}
+        <nav className="flex items-center justify-center lg:justify-start gap-2 text-white/80 text-sm font-medium mb-8 md:mb-14">
           <Link href="/" className="hover:text-white transition-colors">
             Home
           </Link>

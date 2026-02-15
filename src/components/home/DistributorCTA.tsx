@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const DistributorCTA = () => {
   return (
@@ -65,37 +66,42 @@ const DistributorCTA = () => {
              >
                  <div className="relative flex flex-col items-center">
                     <div className="w-0.5 h-12 md:h-32 bg-gray-600/30 -mt-12 md:-mt-32"></div>
-                    <img 
+                    <Image 
                       src="/images/new/image9.png" 
                       alt="Hanging Snack Pack"
-                      className="w-42 md:w-60 drop-shadow-2xl rounded-lg" 
+                      width={300}
+                      height={300}
+                      className="w-42 md:w-60 h-auto drop-shadow-2xl rounded-lg" 
                     />
                  </div>
              </motion.div>
 
              {/* Packs Cluster */}
              <div className="relative md:absolute md:bottom-[-60px] md:right-[-20px] flex items-center justify-center w-full md:w-auto z-30 md:pr-4 mt-0 md:mt-0 px-4">
-                <motion.img 
+                <motion.div 
                   initial={{ x: 20, opacity: 0 }}
                   whileInView={{ x: 0, opacity: 1 }}
                   transition={{ delay: 0.5 }}
-                  src="/images/new/image8.png" 
                   className="w-32 md:w-56 -mr-16 md:-mr-12 mb-0 md:mb-4 drop-shadow-xl z-20 transform -rotate-12"
-                />
-                <motion.img 
+                >
+                    <Image src="/images/new/image8.png" alt="Snack Pack 1" width={300} height={300} className="w-full h-auto" />
+                </motion.div>
+                <motion.div 
                   initial={{ y: 20, opacity: 0 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
-                  src="/images/new/image10.png" 
                   className="w-40 md:w-64 mb-0 drop-shadow-2xl z-40 relative md:top-0"
-                />
-                <motion.img 
+                >
+                    <Image src="/images/new/image10.png" alt="Snack Pack 2" width={350} height={350} className="w-full h-auto" />
+                </motion.div>
+                <motion.div 
                    initial={{ x: -20, opacity: 0 }}
                    whileInView={{ x: 0, opacity: 1 }}
                    transition={{ delay: 0.7 }}
-                   src="/images/new/image5.png" 
                    className="w-32 md:w-56 -ml-16 md:-ml-12 mb-0 md:mb-6 drop-shadow-xl z-20 transform rotate-12"
-                />
+                >
+                    <Image src="/images/new/image5.png" alt="Snack Pack 3" width={300} height={300} className="w-full h-auto" />
+                </motion.div>
              </div>
           </div>
 

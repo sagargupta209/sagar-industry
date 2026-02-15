@@ -156,45 +156,45 @@ const CategoryCarousel = () => {
                         transition={{ delay: index * 0.1, duration: 0.5 }}
                         style={{ transformOrigin: 'bottom center' }}
                     >
-                        {/* Content Overlay */}
-                        <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition duration-500" />
-                        
-                        {/* Decorative Background Elements */}
-                         <Image 
-                            src={cat.decor} 
-                            width={300}
-                            height={300}
-                            className="absolute -top-10 -right-10 w-40 opacity-30 group-hover:opacity-50 group-hover:scale-110 transition duration-700 blur-sm mix-blend-overlay object-cover"
-                             alt="decoration"
-                         />
+                        <Link href={`/products?category=${encodeURIComponent(cat.name)}`} className="block w-full h-full">
+                            {/* Content Overlay */}
+                            <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition duration-500" />
+                            
+                            {/* Decorative Background Elements */}
+                             <Image 
+                                src={cat.decor} 
+                                width={300}
+                                height={300}
+                                className="absolute -top-10 -right-10 w-40 opacity-30 group-hover:opacity-50 group-hover:scale-110 transition duration-700 blur-sm mix-blend-overlay object-cover"
+                                 alt="decoration"
+                             />
 
-                        {/* Main Product Image (Floating) */}
-                        <motion.div 
-                           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 md:w-64 z-10"
-                           whileHover={{ scale: 1.15, rotate: -5 }}
-                           transition={{ type: "spring", stiffness: 300 }}
-                        >
-                            <Image 
-                              src={cat.image} 
-                              width={400}
-                              height={400}
-                              className="w-full drop-shadow-2xl object-contain" 
-                              alt={cat.name} 
-                            />
-                        </motion.div>
-                        
-                        {/* Card Footer Info */}
-                        <div className="absolute bottom-0 left-0 right-0 p-8 pt-20 bg-gradient-to-t from-black/60 to-transparent z-20 flex justify-between items-end">
-                            <div>
-                                <h3 className="text-white text-3xl font-black mb-1 tracking-wide shadow-black drop-shadow-md">{cat.name}</h3>
-                                <p className="text-white/90 font-medium text-sm">{cat.desc}</p>
+                            {/* Main Product Image (Floating) */}
+                            <motion.div 
+                               className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 md:w-64 z-10"
+                               whileHover={{ scale: 1.15, rotate: -5 }}
+                               transition={{ type: "spring", stiffness: 300 }}
+                            >
+                                <Image 
+                                  src={cat.image} 
+                                  width={400} 
+                                  height={400} 
+                                  className="w-full drop-shadow-2xl object-contain" 
+                                  alt={cat.name} 
+                                />
+                            </motion.div>
+                            
+                            {/* Card Footer Info */}
+                            <div className="absolute bottom-0 left-0 right-0 p-8 pt-20 bg-gradient-to-t from-black/60 to-transparent z-20 flex justify-between items-end">
+                                <div>
+                                    <h3 className="text-white text-3xl font-black mb-1 tracking-wide shadow-black drop-shadow-md">{cat.name}</h3>
+                                    <p className="text-white/90 font-medium text-sm">{cat.desc}</p>
+                                </div>
+                                <div className="bg-white text-black w-10 h-10 rounded-full flex items-center justify-center group-hover:bg-yellow-400 transition transform group-hover:rotate-45">
+                                    <ArrowUpRight size={20} strokeWidth={3} />
+                                </div>
                             </div>
-                            <button className="bg-white text-black w-10 h-10 rounded-full flex items-center justify-center hover:bg-yellow-400 transition transform hover:rotate-45">
-                                <ArrowUpRight size={20} strokeWidth={3} />
-                            </button>
-                        </div>
-
-
+                        </Link>
                     </motion.div>
                 ))}
             </motion.div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { useSettings } from '@/context/SettingsContext';
 
 const ContactSection = () => {
@@ -62,26 +63,38 @@ const ContactSection = () => {
           </div>
  
           {/* Right Content - Floating Product Images */}
-          <div className="w-full md:w-1/2 relative h-[200px] md:h-auto flex items-center justify-center md:justify-end mt-1 md:mt-0">
-             <motion.img
-               src="/images/new/image2.png" 
-               alt="Spicy Chips"
+          <div className="w-full md:w-1/2 relative h-[250px] md:h-auto flex items-center justify-center md:justify-end mt-4 md:mt-0">
+             <motion.div
                initial={{ rotate: 10, x: -30, opacity: 0 }}
                whileInView={{ rotate: -12, x: 0, opacity: 1 }}
                viewport={{ once: true }}
                transition={{ delay: 0.4, duration: 0.8, type: "spring" }}
-               className="absolute w-56 md:w-[350px] lg:w-[420px] drop-shadow-2xl z-10 left-0 md:-left-[40px] md:-top-[80px] top-0 md:top-auto"
-             />
+               className="absolute w-56 md:w-[350px] lg:w-[420px] drop-shadow-2xl z-10 left-0 md:-left-[40px] md:-top-[80px] top-4 md:top-auto"
+             >
+                <Image 
+                  src="/images/new/image2.png" 
+                  alt="Spicy Chips" 
+                  width={600} 
+                  height={600} 
+                  className="w-full h-auto"
+                />
+             </motion.div>
  
-             <motion.img
-               src="/images/new/image3.png" 
-               alt="Cream Onion"
+             <motion.div
                initial={{ rotate: -10, x: 30, opacity: 0 }}
                whileInView={{ rotate: 12, x: 0, opacity: 1 }}
                viewport={{ once: true }}
                transition={{ delay: 0.6, duration: 0.8, type: "spring" }}
                className="absolute w-64 md:w-[380px] lg:w-[450px] drop-shadow-2xl z-20 right-[2%] md:left-[120px] md:-top-[40px] bottom-0 md:bottom-auto"
-             />
+             >
+                <Image 
+                  src="/images/new/image3.png" 
+                  alt="Cream Onion" 
+                  width={600} 
+                  height={600} 
+                  className="w-full h-auto"
+                />
+             </motion.div>
           </div>
 
         </motion.div>

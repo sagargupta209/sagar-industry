@@ -99,9 +99,9 @@ const ProductGrid = ({ products, categories }: ProductGridProps) => {
       {/* ── Category Tabs & Layout Controls ── */}
       <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-10">
         
-        {/* Scrollable Categories */}
-        <div className="w-full md:w-auto overflow-x-auto py-4 scrollbar-hide -mx-4 px-4 md:mx-0 md:px-1">
-          <div className="flex items-center gap-3">
+        {/* Responsive Categories Container */}
+        <div className="w-full md:w-auto overflow-x-auto overflow-y-hidden py-4 -mx-4 px-4 md:mx-0 md:px-0 touch-pan-x">
+          <div className="flex flex-nowrap items-center gap-2 md:gap-3 min-w-max pb-1">
             {[{ _id: 'all', name: 'All' }, ...categories].map((cat) => {
               const isActive = selectedCategory === (cat.name === 'All' ? 'All' : cat.name);
               const label = cat.name === 'All' ? 'All Products' : cat.name;
@@ -111,7 +111,7 @@ const ProductGrid = ({ products, categories }: ProductGridProps) => {
                   key={cat._id}
                   onClick={() => updateCategory(cat.name === 'All' ? 'All' : cat.name)}
                   className={`
-                    whitespace-nowrap px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 relative overflow-hidden group
+                    whitespace-nowrap px-5 md:px-6 py-2 md:py-2.5 rounded-full text-sm font-bold transition-all duration-300 relative overflow-hidden group
                     ${isActive 
                       ? 'bg-gradient-to-r from-orange-500 to-red-600 text-white shadow-lg scale-105 ring-2 ring-orange-200 ring-offset-2' 
                       : 'bg-white text-gray-600 border border-gray-200 hover:border-orange-400 hover:text-orange-600 hover:shadow-md'
