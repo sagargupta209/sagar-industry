@@ -67,7 +67,7 @@ export default function ShopHero() {
                  <img 
                    src="https://images.unsplash.com/photo-1613919113640-25732ec5e61f?q=80&w=1000&auto=format&fit=crop" 
                    alt="Premium Snacks" 
-                   className="w-[110%] h-[110%] object-contain drop-shadow-2xl brightness-110 group-hover:scale-110 transition-transform duration-700"
+                   className="w-full h-full object-cover brightness-110 group-hover:scale-110 transition-transform duration-700"
                  />
               </div>
 
