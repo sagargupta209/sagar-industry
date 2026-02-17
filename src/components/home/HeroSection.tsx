@@ -62,7 +62,7 @@ const HeroSection = () => {
   }
 
   return (
-    <div className="relative w-full h-[80vh] md:h-screen bg-white">
+    <div className="relative w-full h-[80vh] md:h-screen bg-white overflow-hidden">
 
       <AnimatePresence mode="popLayout">
         <motion.div

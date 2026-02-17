@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
-import { Menu, X, Search, User, ShoppingCart, ChevronDown, ChevronRight } from 'lucide-react';
+import { Menu, X, Search, User, ShoppingCart, ChevronDown, ChevronRight, Phone, Mail, MessageCircle } from 'lucide-react';
 import { useDebounce } from 'use-debounce';
 import { motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
@@ -64,25 +64,32 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-[var(--z-navbar-top)] bg-[#1a237e] text-white py-1 md:py-2 text-xs md:text-sm font-medium">
+      <div className="fixed top-0 left-0 right-0 z-[var(--z-navbar-top)] bg-[#1a237e] text-white py-1 md:py-2.5 text-[10px] md:text-xs font-bold tracking-widest uppercase shadow-sm">
         <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-5">
             {settings?.phonePrimary && (
-              <a href={`tel:${settings.phonePrimary}`} className="hover:text-yellow-400 transition flex items-center gap-1">
-                <span>📞</span> {settings.phonePrimary}
-              </a>
-            )}
-            {settings?.emailPrimary && (
-              <a href={`mailto:${settings.emailPrimary}`} className="hidden md:flex hover:text-yellow-400 transition items-center gap-1">
-                <span>✉️</span> {settings.emailPrimary}
+              <a href={`tel:${settings.phonePrimary}`} className="flex items-center gap-2.5 hover:text-yellow-400 transition-all group group-active:scale-95">
+                <span className="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 bg-white/10 rounded-lg group-hover:bg-yellow-400 group-hover:text-black transition-all">
+                  <Phone size={12} className="md:w-4 md:h-4" />
+                </span>
+                <div className="flex flex-col">
+                  <span className="block md:hidden text-[8px] opacity-70 leading-none mb-0.5">Call Us</span>
+                  <span className="tabular-nums leading-none tracking-normal">{settings.phonePrimary}</span>
+                </div>
               </a>
             )}
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center">
              {settings?.whatsapp && (
-               <a href={`https://wa.me/${settings.whatsapp}`} target="_blank" className="hover:text-green-400 transition flex items-center gap-1">
-                 <span className="md:inline hidden">Chat on WhatsApp</span>
-                 <span className="md:hidden inline">💬</span>
+               <a href={`https://wa.me/${settings.whatsapp}`} target="_blank" className="flex items-center gap-2.5 text-white hover:text-green-400 transition-all group group-active:scale-95">
+                 <div className="flex flex-col items-end">
+                   <span className="block md:hidden text-[8px] opacity-70 leading-none mb-0.5">WhatsApp</span>
+                   <span className="hidden md:inline font-bold">Inquiry on WhatsApp</span>
+                   <span className="md:hidden inline font-bold leading-none tracking-normal text-[10px]">Order Now</span>
+                 </div>
+                 <span className="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 bg-green-500 rounded-lg group-hover:bg-green-400 transition-all text-white shadow-lg shadow-green-500/20">
+                   <MessageCircle size={12} className="md:w-4 md:h-4" fill="white" />
+                 </span>
                </a>
              )}
           </div>
@@ -91,11 +98,11 @@ const Navbar = () => {
 
       <nav
         className={clsx(
-          'fixed top-6 md:top-10 left-0 right-0 z-[var(--z-navbar)] transition-all duration-300 shadow-md',
+          'fixed top-[32px] md:top-[52px] left-0 right-0 z-[var(--z-navbar)] transition-all duration-300 shadow-md',
           'bg-[#FFD700] text-black' // Bright Yellow Background
         )}
       >
-        <div className="container mx-auto px-4 md:px-8 h-20 md:h-24 flex justify-between items-center relative">
+        <div className="container mx-auto px-4 md:px-8 h-14 md:h-24 flex justify-between items-center relative">
           
           {/* Desktop Logo */}
           <div className="hidden md:flex flex-shrink-0 items-start absolute top-0 left-8 z-50">
@@ -111,31 +118,27 @@ const Navbar = () => {
              </Link>
           </div>
 
-          {/* Mobile Layout: Hamburger Left, Logo Center, Icons Right */}
+          {/* Mobile Layout: Logo Left, Hamburger Right */}
           <div className="flex md:hidden w-full items-center justify-between">
-             <button 
-               onClick={() => setIsOpen(true)} 
-               className="p-2 -ml-2 text-black hover:text-gray-700"
-               aria-label="Open Menu"
-             >
-               <Menu size={28} strokeWidth={2.5} />
-             </button>
-
-             {/* Centered Logo for Mobile */}
              <Link href="/" className="flex flex-col items-center">
                 <Image 
                   src="/logo.png" 
                   alt={companyName} 
-                  width={48}
-                  height={48}
+                  width={44}
+                  height={44}
                   priority
-                  className="h-12 w-auto object-contain"
+                  style={{ width: "auto", height: "44px" }}
+                   className="object-contain"
                 />
              </Link>
 
-             <div className="flex items-center space-x-3">
-                 <Search size={24} className="cursor-pointer" onClick={() => setIsSearchOpen(true)} aria-label="Search" role="button" />
-             </div>
+             <button 
+               onClick={() => setIsOpen(true)} 
+               className="p-2 -mr-2 text-black hover:text-gray-700"
+               aria-label="Open Menu"
+             >
+               <Menu size={28} strokeWidth={2.5} />
+             </button>
           </div>
 
           {/* Desktop Navigation - Centered (Pushing left margin for logo) */}
@@ -227,6 +230,8 @@ const Navbar = () => {
                   className="relative"
                 >
                    <input 
+                     id="navbar-search"
+                     name="search"
                      type="text" 
                      autoFocus
                      value={searchQuery}

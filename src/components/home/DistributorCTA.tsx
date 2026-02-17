@@ -15,7 +15,7 @@ const DistributorCTA = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="relative bg-[#FFC107] rounded-[30px] md:rounded-[50px] shadow-2xl p-8 pb-2 md:p-14 md:min-h-[500px] flex flex-col md:flex-row items-center border-[6px] md:border-[8px] border-white outline outline-[6px] md:outline-[8px] outline-[#FFC107] max-w-5xl mx-auto"
+          className="relative bg-[#FFC107] rounded-[30px] md:rounded-[50px] shadow-2xl p-8 pb-2 md:p-14 md:min-h-[500px] flex flex-col md:flex-row items-center border-[6px] md:border-[8px] border-white outline outline-[6px] md:outline-[8px] outline-[#FFC107] max-w-5xl mx-auto overflow-hidden"
         >
           
           {/* Decorative Corner Elements */}
@@ -71,7 +71,8 @@ const DistributorCTA = () => {
                       alt="Hanging Snack Pack"
                       width={300}
                       height={300}
-                      className="w-42 md:w-60 h-auto drop-shadow-2xl rounded-lg" 
+                      className="drop-shadow-2xl rounded-lg"
+                       style={{ width: '15rem', height: 'auto' }} 
                     />
                  </div>
              </motion.div>
@@ -84,7 +85,7 @@ const DistributorCTA = () => {
                   transition={{ delay: 0.5 }}
                   className="w-32 md:w-56 -mr-16 md:-mr-12 mb-0 md:mb-4 drop-shadow-xl z-20 transform -rotate-12"
                 >
-                    <Image src="/images/new/image8.png" alt="Snack Pack 1" width={300} height={300} className="w-full h-auto" />
+                    <Image src="/images/new/image8.png" alt="Snack Pack 1" width={300} height={300} className="" style={{ width: '100%', height: 'auto' }} />
                 </motion.div>
                 <motion.div 
                   initial={{ y: 20, opacity: 0 }}
@@ -92,7 +93,7 @@ const DistributorCTA = () => {
                   transition={{ delay: 0.6 }}
                   className="w-40 md:w-64 mb-0 drop-shadow-2xl z-40 relative md:top-0"
                 >
-                    <Image src="/images/new/image10.png" alt="Snack Pack 2" width={350} height={350} className="w-full h-auto" />
+                    <Image src="/images/new/image10.png" alt="Snack Pack 2" width={350} height={350} className="" style={{ width: '100%', height: 'auto' }} />
                 </motion.div>
                 <motion.div 
                    initial={{ x: -20, opacity: 0 }}
@@ -100,7 +101,7 @@ const DistributorCTA = () => {
                    transition={{ delay: 0.7 }}
                    className="w-32 md:w-56 -ml-16 md:-ml-12 mb-0 md:mb-6 drop-shadow-xl z-20 transform rotate-12"
                 >
-                    <Image src="/images/new/image5.png" alt="Snack Pack 3" width={300} height={300} className="w-full h-auto" />
+                    <Image src="/images/new/image5.png" alt="Snack Pack 3" width={300} height={300} className="" style={{ width: '100%', height: 'auto' }} />
                 </motion.div>
              </div>
           </div>

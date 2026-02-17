@@ -9,6 +9,17 @@ const Preloader = () => {
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
+    let fallbackTimeout: NodeJS.Timeout;
+    let checkImagesTimeout: NodeJS.Timeout;
+
+    const finishLoading = () => {
+      clearInterval(interval);
+      clearTimeout(fallbackTimeout);
+      clearTimeout(checkImagesTimeout);
+      
+      setPercent(100);
+      setTimeout(() => setLoading(false), 800);
+    };
 
     const startLoading = () => {
       let currentProgress = 0;
@@ -23,53 +34,52 @@ const Preloader = () => {
       }, 50);
     };
 
-    const finishLoading = () => {
-      clearInterval(interval);
-      setPercent(100);
-      setTimeout(() => setLoading(false), 800);
-    };
-
     startLoading();
 
     // Actual Image Preloading Check
     const checkImages = () => {
       const imgs = document.querySelectorAll('img');
       const totalImages = imgs.length;
+      
       if (totalImages === 0) {
         finishLoading();
         return;
       }
 
       let loadedCount = 0;
+      const onImageLoad = () => {
+        loadedCount++;
+        if (loadedCount >= totalImages) finishLoading();
+      };
+
       imgs.forEach((img) => {
         if (img.complete) {
-          loadedCount++;
+          onImageLoad();
         } else {
-          img.addEventListener('load', () => {
-            loadedCount++;
-            if (loadedCount === totalImages) finishLoading();
-          });
-          img.addEventListener('error', () => {
-            loadedCount++;
-            if (loadedCount === totalImages) finishLoading();
-          });
+          img.addEventListener('load', onImageLoad);
+          img.addEventListener('error', onImageLoad);
         }
       });
-
-      if (loadedCount === totalImages) {
-        finishLoading();
-      }
     };
 
     // Wait for initial JS execution then check images
-    const timeout = setTimeout(checkImages, 500);
+    checkImagesTimeout = setTimeout(checkImages, 500);
 
-    // Absolute fallback
-    window.onload = finishLoading;
+    // Absolute fallback - ensure it closes after 3.5s max no matter what
+    fallbackTimeout = setTimeout(finishLoading, 3500);
+
+    // Browser load event fallback
+    if (document.readyState === 'complete') {
+      finishLoading();
+    } else {
+      window.addEventListener('load', finishLoading);
+    }
 
     return () => {
       clearInterval(interval);
-      clearTimeout(timeout);
+      clearTimeout(fallbackTimeout);
+      clearTimeout(checkImagesTimeout);
+      window.removeEventListener('load', finishLoading);
     };
   }, []);
 

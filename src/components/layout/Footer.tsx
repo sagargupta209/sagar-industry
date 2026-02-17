@@ -58,31 +58,29 @@ const Footer = () => {
         <div className="flex flex-col lg:flex-row justify-between lg:items-start gap-12 mb-16">
           
           {/* Brand & Socials (Left Column) */}
-          <div className="lg:w-1/5 flex flex-col items-center lg:items-start text-center lg:text-left">
-             {(() => {
-                const companyName = settings?.companyName || "SAGAR Industries";
-                const nameParts = companyName.split(' ');
-                const firstName = nameParts[0];
-                const restName = nameParts.slice(1).join(' ');
-                return (
-                  <Link href="/" className="mb-6 block h-20 w-auto">
-                      <img 
-                        src="/logo.png" 
-                        alt={companyName} 
-                        className="h-full w-auto object-contain"
-                      />
-                  </Link>
-                );
-             })()}
+          <div className="lg:w-1/4 flex flex-col items-center lg:items-start text-center lg:text-left gap-8">
+             <Link href="/" className="block relative w-32 h-auto md:w-56">
+                <img 
+                  src="/logo.png" 
+                  alt={settings?.companyName || "SAGAR Industries"} 
+                  className="w-full h-auto object-contain"
+                />
+             </Link>
             
-            <p className="text-gray-400 text-sm mb-6 max-w-xs">
+            <p className="text-gray-400 text-sm md:text-base leading-relaxed max-w-xs md:max-w-sm">
               Delivering the perfect crunch and authentic taste to millions of households since 1995.
             </p>
 
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
                {socialLinks.map(({ Icon, url }, i) => (
-                 <a key={i} href={url} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#FFC107] hover:text-black transition duration-300">
-                   <Icon size={18} />
+                 <a 
+                   key={i} 
+                   href={url} 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   className="w-11 h-11 rounded-full bg-gray-800/50 backdrop-blur-sm border border-gray-700 flex items-center justify-center hover:bg-[#FFC107] hover:border-[#FFC107] hover:text-black transition-all duration-300 hover:-translate-y-1"
+                 >
+                   <Icon size={20} />
                  </a>
                ))}
             </div>
@@ -109,9 +107,9 @@ const Footer = () => {
              </div>
 
              {/* Mobile Accordion */}
-             <div className="lg:hidden space-y-4">
+             <div className="lg:hidden space-y-6">
                {footerLinksArr.map((section) => (
-                 <div key={section.title} className="border-b border-gray-800 last:border-none pb-2">
+                 <div key={section.title} className="border-b border-gray-800 last:border-none pb-4">
                    <button 
                      onClick={() => toggleAccordion(section.title)}
                      className="w-full flex justify-between items-center py-2 text-left focus:outline-none"
@@ -146,9 +144,9 @@ const Footer = () => {
           </div>
 
           {/* Newsletter (Right Column) */}
-          <div className="lg:w-1/5 flex flex-col items-center lg:items-end">
+          <div className="lg:w-1/4 flex flex-col items-center lg:items-end mt-10 lg:mt-0">
              <div className="w-full max-w-sm">
-                <h4 className="text-white font-bold text-lg mb-4 text-center lg:text-right">Subscribe Newsletter</h4>
+                <h4 className="text-white font-bold text-lg mb-6 text-center lg:text-right uppercase tracking-widest text-[#FFC107]">Subscribe Newsletter</h4>
                 <NewsletterForm />
              </div>
           </div>
@@ -208,6 +206,8 @@ const NewsletterForm = () => {
     return (
         <form onSubmit={handleSubmit} className="relative">
             <input 
+                id="newsletter-email"
+                name="email"
                 type="email" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}

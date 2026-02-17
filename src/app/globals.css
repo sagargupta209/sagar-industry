@@ -23,7 +23,22 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-outfit), sans-serif;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
   /* scroll-behavior: smooth;  Conflicts with Lenis */
+}
+
+/* Prevent all images from ever causing horizontal scroll */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure sections don't bleed out */
+section {
+  width: 100%;
+  overflow-x: hidden;
 }
 
 /* Lenis Recommended Styles */
@@ -76,9 +91,18 @@ html.lenis body {
 
 /* Global Loading Animation */
 @keyframes custom-loading {
-  0% { transform: translateX(-100%); width: 0%; }
-  50% { transform: translateX(0%); width: 100%; }
-  100% { transform: translateX(100%); width: 0%; }
+  0% {
+    transform: translateX(-100%);
+    width: 0%;
+  }
+  50% {
+    transform: translateX(0%);
+    width: 100%;
+  }
+  100% {
+    transform: translateX(100%);
+    width: 0%;
+  }
 }
 
 .animate-loading-bar {
@@ -86,8 +110,12 @@ html.lenis body {
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 .animate-shimmer {

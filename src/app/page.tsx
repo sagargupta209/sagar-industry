@@ -10,7 +10,7 @@ import useSWR from 'swr';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-const MotionImage = motion(Image);
+const MotionImage = motion.create(Image);
 
 import { useSettings } from '@/context/SettingsContext';
 
@@ -37,7 +37,7 @@ export default function Home() {
 
       {/* ── Features Bar ── */}
       <section className="bg-[#1a237e] text-white py-8 md:py-16 relative overflow-hidden -mt-2 z-[var(--z-content)] rounded-b-[2rem] shadow-xl">
-         <div className="container mx-auto px-2 md:px-6 grid grid-cols-3 gap-2 md:gap-8 text-center relative z-10">
+         <div className="container mx-auto px-4 md:px-6 grid grid-cols-3 gap-4 md:gap-8 text-center relative z-10 w-full overflow-hidden">
             {features.map((f, i) => (
               <motion.div 
                 key={i}
@@ -45,11 +45,11 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.2 }}
-                className="flex flex-col items-center gap-2 p-1 md:p-4 rounded-xl hover:bg-white/5 transition-colors relative"
+                className="flex flex-col items-center gap-2 p-1 md:p-4 transition-colors relative w-full"
               >
-                 <div className="bg-white p-2 md:p-3 rounded-full shadow-lg scale-75 md:scale-100">{f.icon}</div>
-                 <h3 className="font-bold text-[10px] md:text-xl leading-tight">{f.title}</h3>
-                 <p className="text-blue-100 text-[8px] md:text-base opacity-80 md:opacity-100 line-clamp-2 md:line-clamp-none">{f.desc}</p>
+                 <div className="bg-white p-2 md:p-3 rounded-full shadow-lg scale-75 md:scale-100 flex items-center justify-center">{f.icon}</div>
+                 <h3 className="font-bold text-[10px] md:text-xl leading-tight w-full break-words">{f.title}</h3>
+                 <p className="text-blue-100 text-[8px] md:text-base opacity-90 line-clamp-2 md:line-clamp-none w-full">{f.desc}</p>
               </motion.div>
             ))}
          </div>
@@ -67,7 +67,7 @@ export default function Home() {
       <section className="py-4 md:py-24 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-orange-50 rounded-l-[5rem] -z-10 hidden lg:block"></div>
         
-        <div className="container mx-auto px-6 flex flex-col lg:flex-row items-center gap-0 md:gap-16">
+        <div className="container mx-auto px-6 overflow-hidden flex flex-col lg:flex-row items-center gap-0 md:gap-16">
           <motion.div 
              initial={{ opacity: 0, x: -50 }}
              whileInView={{ opacity: 1, x: 0 }}
@@ -85,7 +85,8 @@ export default function Home() {
                 alt="Chaat Papdi" 
                 width={500}
                 height={500}
-                className="w-full h-auto drop-shadow-[0_35px_35px_rgba(0,0,0,0.3)] relative z-[var(--z-hero-nav)]"
+                className="drop-shadow-[0_35px_35px_rgba(0,0,0,0.3)] relative z-[var(--z-hero-nav)]"
+                style={{ width: '100%', height: 'auto' }}
               />
               
               {/* Background Image Left */}
@@ -94,7 +95,8 @@ export default function Home() {
                 alt="Decorative Snack"
                 width={400}
                 height={400}
-                className="absolute top-4 left-0 md:-left-12 w-[35%] md:w-[85%] h-auto opacity-60 blur-[1px] -rotate-12 z-[var(--z-content)]"
+                className="absolute top-4 left-0 md:-left-12 opacity-60 blur-[1px] -rotate-12 z-[var(--z-content)]"
+                 style={{ width: '35%', height: 'auto' }}
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 0.6, x: 0 }}
                 transition={{ delay: 0.4 }}
@@ -106,7 +108,8 @@ export default function Home() {
                 alt="Decorative Snack"
                 width={400}
                 height={400}
-                className="absolute top-4 right-0 md:-right-12 w-[35%] md:w-[85%] h-auto opacity-60 blur-[1px] rotate-12 z-[var(--z-elevated)]"
+                className="absolute top-4 right-0 md:-right-12 opacity-60 blur-[1px] rotate-12 z-[var(--z-elevated)]"
+                 style={{ width: '35%', height: 'auto' }}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 0.6, x: 0 }}
                 transition={{ delay: 0.5 }}

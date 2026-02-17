@@ -165,7 +165,8 @@ const CategoryCarousel = () => {
                                 src={cat.decor} 
                                 width={300}
                                 height={300}
-                                className="absolute -top-10 -right-10 w-40 opacity-30 group-hover:opacity-50 group-hover:scale-110 transition duration-700 blur-sm mix-blend-overlay object-cover"
+                                className="absolute -top-10 -right-10 opacity-30 group-hover:opacity-50 group-hover:scale-110 transition duration-700 blur-sm mix-blend-overlay object-cover"
+                                style={{ width: '10rem', height: 'auto' }}
                                  alt="decoration"
                              />
 
@@ -179,7 +180,8 @@ const CategoryCarousel = () => {
                                   src={cat.image} 
                                   width={400} 
                                   height={400} 
-                                  className="w-full drop-shadow-2xl object-contain" 
+                                  className="drop-shadow-2xl object-contain"
+                                   style={{ width: '100%', height: 'auto' }} 
                                   alt={cat.name} 
                                 />
                             </motion.div>
