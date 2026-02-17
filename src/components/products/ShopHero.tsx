@@ -56,23 +56,23 @@ export default function ShopHero() {
           </div>
 
           {/* Right Visual — Decorative snack composition */}
-          <div className="hidden lg:block w-full lg:w-1/2 max-w-md lg:max-w-lg relative mt-4 lg:mt-0 z-10">
-            <div className="relative w-full aspect-square">
+          <div className="w-full lg:w-1/2 max-w-md lg:max-w-lg relative mt-12 lg:mt-0 z-10 mx-auto">
+            <div className="relative w-full aspect-square max-w-[300px] sm:max-w-[400px] lg:max-w-none mx-auto">
               {/* Central product showcase circle */}
-              <div className="absolute inset-4 bg-white/15 backdrop-blur-sm rounded-full border-2 border-white/20 flex items-center justify-center shadow-2xl overflow-hidden">
+              <div className="absolute inset-4 bg-white/10 backdrop-blur-md rounded-full border-2 border-white/20 flex items-center justify-center shadow-2xl overflow-hidden ring-8 ring-white/5">
                  <img 
-                   src="https://images.unsplash.com/photo-1599488615731-7e5128160cc3?q=80&w=1974&auto=format&fit=crop" 
-                   alt="Premium Snacks Assortment" 
-                   className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700"
+                   src="https://images.unsplash.com/photo-1566478919030-26d9e54179d6?q=80&w=1000&auto=format&fit=crop" 
+                   alt="Premium Snacks" 
+                   className="w-[120%] h-[120%] object-contain drop-shadow-2xl brightness-110"
                  />
               </div>
 
               {/* Orbit decorations */}
-              <div className="absolute -top-2 left-1/2 -translate-x-1/2 bg-yellow-400 text-[#1a237e] px-4 py-2 rounded-full font-black text-sm shadow-lg border-2 border-yellow-300 animate-bounce">
+              <div className="absolute -top-2 left-1/2 -translate-x-1/2 bg-[#FFD700] text-[#1a237e] px-5 py-2 rounded-full font-black text-xs sm:text-sm shadow-xl border-2 border-white animate-bounce z-20">
                 NEW!
               </div>
-              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded-full font-bold text-xs shadow-lg uppercase tracking-wider">
-                100% Quality
+              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-[#ff3d00] text-white px-5 py-2 rounded-full font-black text-[10px] sm:text-xs shadow-xl uppercase tracking-tighter border-2 border-white z-20">
+                100% QUALITY
               </div>
             </div>
           </div>
