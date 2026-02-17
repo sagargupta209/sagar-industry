@@ -65,9 +65,9 @@ export default function ShopHero() {
               {/* Central product showcase circle */}
               <div className="absolute inset-4 bg-white/10 backdrop-blur-md rounded-full border-2 border-white/20 flex items-center justify-center shadow-2xl overflow-hidden ring-8 ring-white/5">
                  <img 
-                   src="https://images.unsplash.com/photo-1566478919030-26d9e54179d6?q=80&w=1000&auto=format&fit=crop" 
+                   src="https://images.unsplash.com/photo-1613919113640-25732ec5e61f?q=80&w=1000&auto=format&fit=crop" 
                    alt="Premium Snacks" 
-                   className="w-[120%] h-[120%] object-contain drop-shadow-2xl brightness-110"
+                   className="w-[110%] h-[110%] object-contain drop-shadow-2xl brightness-110 group-hover:scale-110 transition-transform duration-700"
                  />
               </div>
 
