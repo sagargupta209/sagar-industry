@@ -7,6 +7,7 @@ import Footer from "@/components/layout/Footer";
 import SmoothScrolling from "@/components/providers/SmoothScrolling";
 import OfflineIndicator from "@/components/ui/OfflineIndicator";
 import Preloader from "@/components/ui/Preloader";
+import PageTransition from "@/components/providers/PageTransition";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -115,8 +116,10 @@ export default function RootLayout({
               }}
             />
             <Navbar />
-            <main className="min-h-screen pt-[80px] md:pt-[130px]">
-              {children}
+            <main className="min-h-screen pt-[88px] md:pt-[148px]">
+              <PageTransition>
+                {children}
+              </PageTransition>
             </main>
             <Footer />
             <OfflineIndicator />

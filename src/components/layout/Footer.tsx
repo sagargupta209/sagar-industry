@@ -215,22 +215,31 @@ const NewsletterForm = () => {
                 className="w-full bg-[#1e1e1e] border border-gray-700 text-white rounded-full py-3 px-6 pr-12 focus:outline-none focus:border-[#FFC107] focus:ring-1 focus:ring-[#FFC107] transition-all placeholder-gray-500"
                 required
             />
-            <button 
+            <motion.button 
                 type="submit"
                 disabled={status === 'loading'}
-                className="absolute right-1 top-1 bottom-1 bg-[#00A651] hover:bg-[#008f45] text-white w-10 h-10 rounded-full flex items-center justify-center transition-transform hover:scale-105 disabled:opacity-50"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="absolute right-1 top-1 bottom-1 bg-[#00A651] hover:bg-[#008f45] text-white w-10 h-10 rounded-full flex items-center justify-center transition-all disabled:opacity-50"
             >
                 {status === 'loading' ? (
                    <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
                 ) : (
                    <ArrowRight size={18} />
                 )}
-            </button>
-            {status !== 'idle' && (
-                <p className={`absolute -bottom-6 right-0 text-[10px] font-bold uppercase tracking-wider ${status === 'success' ? 'text-green-500' : 'text-red-500'}`}>
-                    {message}
-                </p>
-            )}
+            </motion.button>
+            <AnimatePresence>
+              {status !== 'idle' && (
+                  <motion.p 
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className={`absolute -bottom-6 right-0 text-[10px] font-bold uppercase tracking-wider ${status === 'success' ? 'text-green-500' : 'text-red-500'}`}
+                  >
+                      {message}
+                  </motion.p>
+              )}
+            </AnimatePresence>
         </form>
     );
 };

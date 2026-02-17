@@ -132,13 +132,14 @@ const Navbar = () => {
                 />
              </Link>
 
-             <button 
+             <motion.button 
                onClick={() => setIsOpen(true)} 
-               className="p-2 -mr-2 text-black hover:text-gray-700"
+               whileTap={{ scale: 0.9 }}
+               className="p-2 -mr-2 text-black hover:text-gray-700 active:bg-black/5 rounded-full transition-colors"
                aria-label="Open Menu"
              >
                <Menu size={28} strokeWidth={2.5} />
-             </button>
+             </motion.button>
           </div>
 
           {/* Desktop Navigation - Centered (Pushing left margin for logo) */}
@@ -183,15 +184,16 @@ const Navbar = () => {
           </div>
 
 
-          {/* Desktop Right Icons */}
           <div className="hidden md:flex items-center space-x-6">
-             <button 
+             <motion.button 
                 onClick={() => setIsSearchOpen(true)}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 className="p-2 bg-white/30 rounded-full hover:bg-white/50 transition cursor-pointer text-[#1a237e]"
                 aria-label="Search Products"
              >
                 <Search size={22} strokeWidth={2.5} />
-             </button>
+             </motion.button>
           </div>
 
         </div>

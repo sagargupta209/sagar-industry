@@ -147,27 +147,33 @@ const HeroSection = () => {
         </motion.div>
       </AnimatePresence>
 
-      <button 
+      <motion.button 
         onClick={() => setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1))}
-        className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-[var(--z-hero-nav)] p-2 bg-black/20 hover:bg-black/40 rounded-full text-white transition focus:outline-none flex items-center justify-center"
+        whileHover={{ scale: 1.1, backgroundColor: 'rgba(0,0,0,0.4)' }}
+        whileTap={{ scale: 0.9 }}
+        className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-[var(--z-hero-nav)] p-2 bg-black/20 rounded-full text-white transition-colors focus:outline-none flex items-center justify-center"
         aria-label="Previous Slide"
       >
         <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
-      </button>
-       <button 
+      </motion.button>
+       <motion.button 
         onClick={() => setCurrent((prev) => (prev + 1) % slides.length)}
-        className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-[var(--z-hero-nav)] p-2 bg-black/20 hover:bg-black/40 rounded-full text-white transition focus:outline-none flex items-center justify-center"
+        whileHover={{ scale: 1.1, backgroundColor: 'rgba(0,0,0,0.4)' }}
+        whileTap={{ scale: 0.9 }}
+        className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-[var(--z-hero-nav)] p-2 bg-black/20 rounded-full text-white transition-colors focus:outline-none flex items-center justify-center"
         aria-label="Next Slide"
       >
         <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
-      </button>
+      </motion.button>
       
       <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-[var(--z-hero-nav)] flex space-x-2">
       {/* indicators */}
         {slides.map((s: IHeroSlide, index: number) => (
-          <button
+          <motion.button
             key={s._id || s.id || index}
             onClick={() => setCurrent(index)}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.8 }}
             className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all ${index === current ? 'bg-orange-500 w-6 md:w-8' : 'bg-black/20'}`}
             aria-label={`Go to slide ${index + 1}`}
           />
