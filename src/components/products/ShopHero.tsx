@@ -55,7 +55,7 @@ export default function ShopHero() {
               <span className="block text-yellow-300">Crunch!</span>
             </h1>
             <p className="text-lg sm:text-xl text-white/85 max-w-lg mx-auto lg:mx-0 leading-relaxed font-medium">
-              Explore our premium range of chips, namkeens, fryums & more — made with the authentic flavours of Gujarat.
+              Explore our premium range of chips, namkeens, fryums & more — made with the authentic flavours of Rajnandgaon.
             </p>
           </div>
 

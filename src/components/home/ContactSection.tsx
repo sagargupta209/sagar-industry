@@ -37,7 +37,7 @@ const ContactSection = () => {
                 <p className="text-sm md:text-base font-medium leading-relaxed opacity-90">
                   {settings?.addressStreet || 'Survey No.19, Vajdi (Vad), Kalawad Road,'}<br/>
                   {settings?.addressArea ? `${settings.addressArea}, ` : ''}
-                  {settings?.addressCity || 'Lodhika, Rajkot'} - {settings?.addressPincode || '360021'}, {settings?.addressState || 'Gujarat (India)'}.
+                  {settings?.addressCity || 'Lodhika, Rajkot'} - {settings?.addressPincode || '360021'}, {settings?.addressState || 'Rajnandgaon (India)'}.
                 </p>
               </div>
  

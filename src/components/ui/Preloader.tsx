@@ -119,7 +119,7 @@ const Preloader = () => {
               <h2 className="text-white text-2xl md:text-3xl font-black tracking-[0.2em] uppercase">
                 Sagar <span className="text-yellow-400">Industry</span>
               </h2>
-              <p className="text-blue-200/60 text-xs font-bold tracking-widest mt-2 uppercase">Authentic Taste of Gujarat</p>
+              <p className="text-blue-200/60 text-xs font-bold tracking-widest mt-2 uppercase">Authentic Taste of Rajnandgaon</p>
             </motion.div>
 
             {/* Progress Bar Container */}

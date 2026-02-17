@@ -54,7 +54,7 @@ export async function generateMetadata(): Promise<Metadata> {
   } catch (error) {
     return {
       title: "Sagar Industry | Premium Snacks & Namkeens",
-      description: "Taste the authentic flavors of Gujarat with Sagar Industry's premium range of chips, namkeens, and fryums.",
+      description: "Taste the authentic flavors of Rajnandgaon with Sagar Industry's premium range of chips, namkeens, and fryums.",
     };
   }
 }
@@ -91,7 +91,7 @@ export default function RootLayout({
                     "streetAddress": "Plot No. 45, GIDC Phase II",
                     "addressLocality": "Rajkot",
                     "postalCode": "360003",
-                    "addressRegion": "Gujarat",
+                    "addressRegion": "Rajnandgaon",
                     "addressCountry": "IN"
                   },
                   "geo": {

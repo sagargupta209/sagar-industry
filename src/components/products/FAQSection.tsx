@@ -8,7 +8,7 @@ const faqs = [
   {
     question: 'Where does Sagar Industry deliver?',
     answer:
-      'We currently deliver across Gujarat and all major metro cities in India. We are actively expanding to cover more regions. Check pincode availability at checkout.',
+      'We currently deliver across Rajnandgaon and all major metro cities in India. We are actively expanding to cover more regions. Check pincode availability at checkout.',
   },
   {
     question: 'Can I place bulk orders for events or parties?',
