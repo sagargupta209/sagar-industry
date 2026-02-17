@@ -24,14 +24,18 @@ export default function ShopHero() {
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-32 md:pt-36 pb-16 sm:pb-20 md:pb-24">
-        {/* Breadcrumb - Centered on Mobile, Start on Desktop */}
-        <nav className="flex items-center justify-center lg:justify-start gap-2 text-white/80 text-sm font-medium mb-8 md:mb-14">
-          <Link href="/" className="hover:text-white transition-colors">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 md:pt-12 pb-12 sm:pb-16 md:pb-16">
+        {/* Breadcrumb - Modern Styled */}
+        <nav className="flex items-center justify-center lg:justify-start gap-3 text-white/70 text-xs md:text-sm font-bold uppercase tracking-widest mb-6 md:mb-10">
+          <Link href="/" className="hover:text-yellow-300 transition-colors flex items-center gap-1.5 group">
+            <span className="w-1.5 h-1.5 bg-white/40 rounded-full group-hover:bg-yellow-300 transition-colors"></span>
             Home
           </Link>
-          <span className="text-white/50">/</span>
-          <span className="text-white font-semibold">Shop</span>
+          <span className="text-white/30 font-light text-lg">/</span>
+          <span className="text-white flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 bg-yellow-400 rounded-full shadow-sm shadow-yellow-400/50"></span>
+            Shop
+          </span>
         </nav>
 
         {/* Hero Content — two column on desktop */}
