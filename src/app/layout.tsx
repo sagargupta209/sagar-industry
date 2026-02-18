@@ -116,7 +116,7 @@ export default function RootLayout({
               }}
             />
             <Navbar />
-            <main className="min-h-screen pt-[88px] md:pt-[148px]">
+            <main className="min-h-screen pt-[56px] md:pt-[148px]">
               <PageTransition>
                 {children}
               </PageTransition>
