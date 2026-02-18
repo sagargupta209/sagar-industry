@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 const Preloader = () => {
   const [loading, setLoading] = useState(true);
@@ -10,76 +11,51 @@ const Preloader = () => {
   useEffect(() => {
     let interval: NodeJS.Timeout;
     let fallbackTimeout: NodeJS.Timeout;
-    let checkImagesTimeout: NodeJS.Timeout;
 
     const finishLoading = () => {
       clearInterval(interval);
       clearTimeout(fallbackTimeout);
-      clearTimeout(checkImagesTimeout);
       
       setPercent(100);
-      setTimeout(() => setLoading(false), 800);
+      // Exit precisely when the data is ready
+      setLoading(false);
     };
 
     const startLoading = () => {
       let currentProgress = 0;
       interval = setInterval(() => {
-        currentProgress += Math.random() * 5;
-        if (currentProgress >= 90) {
+        currentProgress += Math.random() * 20;
+        if (currentProgress >= 95) {
           clearInterval(interval);
-          setPercent(90);
+          setPercent(95);
         } else {
           setPercent(Math.floor(currentProgress));
         }
-      }, 50);
+      }, 10);
     };
 
     startLoading();
 
-    // Actual Image Preloading Check
-    const checkImages = () => {
-      const imgs = document.querySelectorAll('img');
-      const totalImages = imgs.length;
-      
-      if (totalImages === 0) {
+    // Kill preloader delay entirely for better LCP.
+    // If we're already interactive, we've achieved meaningful paint.
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
         finishLoading();
-        return;
-      }
-
-      let loadedCount = 0;
-      const onImageLoad = () => {
-        loadedCount++;
-        if (loadedCount >= totalImages) finishLoading();
-      };
-
-      imgs.forEach((img) => {
-        if (img.complete) {
-          onImageLoad();
-        } else {
-          img.addEventListener('load', onImageLoad);
-          img.addEventListener('error', onImageLoad);
-        }
-      });
-    };
-
-    // Wait for initial JS execution then check images
-    checkImagesTimeout = setTimeout(checkImages, 500);
-
-    // Absolute fallback - ensure it closes after 3.5s max no matter what
-    fallbackTimeout = setTimeout(finishLoading, 3500);
-
-    // Browser load event fallback
-    if (document.readyState === 'complete') {
-      finishLoading();
     } else {
-      window.addEventListener('load', finishLoading);
+      const handleInteractive = () => {
+        if (document.readyState === 'interactive') {
+          finishLoading();
+          document.removeEventListener('readystatechange', handleInteractive);
+        }
+      };
+      document.addEventListener('readystatechange', handleInteractive);
     }
+
+    // Absolute fallback reduced to 1s for better UX/LCP
+    fallbackTimeout = setTimeout(finishLoading, 1000);
 
     return () => {
       clearInterval(interval);
       clearTimeout(fallbackTimeout);
-      clearTimeout(checkImagesTimeout);
-      window.removeEventListener('load', finishLoading);
     };
   }, []);
 
@@ -89,8 +65,9 @@ const Preloader = () => {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ 
+            opacity: 0,
             y: '-100%',
-            transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] }
+            transition: { duration: 0.4, ease: [0.45, 0, 0.55, 1] }
           }}
           className="fixed inset-0 z-[var(--z-preloader)] bg-[#1a237e] flex flex-col items-center justify-center overflow-hidden"
         >
@@ -102,18 +79,22 @@ const Preloader = () => {
               transition={{ duration: 0.5 }}
               className="mb-8"
             >
-              <img 
-                src="/logo.png" 
-                alt="Sagar Industry Logo" 
-                className="w-32 h-32 md:w-48 md:h-48 object-contain drop-shadow-2xl brightness-110"
-              />
+              <div className="relative w-32 h-32 md:w-48 md:h-48">
+                <Image 
+                  src="/logo.png" 
+                  alt="Sagar Industry Logo" 
+                  fill
+                  className="object-contain drop-shadow-2xl brightness-110"
+                  priority
+                />
+              </div>
             </motion.div>
 
             {/* Brand Name */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
+              transition={{ delay: 0.2 }}
               className="text-center mb-10"
             >
               <h2 className="text-white text-2xl md:text-3xl font-black tracking-[0.2em] uppercase">
@@ -131,7 +112,7 @@ const Preloader = () => {
               />
             </div>
             
-            <div className="mt-4 text-yellow-400/80 font-mono text-sm font-bold antialiased">
+            <div className="mt-4 text-yellow-400/80 font-mono text-sm font-bold antialiased w-20 text-center tabular-nums">
                 {percent}%
             </div>
           </div>
@@ -149,3 +130,4 @@ const Preloader = () => {
 };
 
 export default Preloader;
+

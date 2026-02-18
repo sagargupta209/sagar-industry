@@ -37,8 +37,8 @@ export async function generateMetadata(): Promise<Metadata> {
       },
       openGraph: {
         title: settings?.metaTitle || "Sagar Industry | Premium Snacks & Namkeens",
-        description: settings?.metaDescription || "Taste the authentic flavors of Gujarat with Sagar Industry's premium range of chips, namkeens, and fryums.",
-        url: "https://sagarindustry.com",
+        description: settings?.metaDescription || "Taste the authentic flavors of Rajnandgaon with Sagar Industry's premium range of chips, namkeens, and fryums.",
+        url: "https://www.sagarindustry.com",
         siteName: "Sagar Industry",
         images: settings?.ogImage ? [{ url: settings.ogImage, width: 1200, height: 630 }] : [],
         locale: "en_US",
@@ -88,10 +88,10 @@ export default function RootLayout({
                   "telephone": "+91 98765 43210",
                   "address": {
                     "@type": "PostalAddress",
-                    "streetAddress": "Plot No. 45, GIDC Phase II",
-                    "addressLocality": "Rajkot",
-                    "postalCode": "360003",
-                    "addressRegion": "Rajnandgaon",
+                    "streetAddress": "Ghatula, Khairagarh",
+                    "addressLocality": "Rajnandgaon",
+                    "postalCode": "491441",
+                    "addressRegion": "Chhattisgarh",
                     "addressCountry": "IN"
                   },
                   "geo": {

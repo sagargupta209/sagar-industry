@@ -35,9 +35,9 @@ const ContactSection = () => {
               <div className="text-center md:text-left">
                 <h3 className="text-lg md:text-xl font-bold mb-1">{settings?.companyName || 'Sagar Industries Private Limited'}</h3>
                 <p className="text-sm md:text-base font-medium leading-relaxed opacity-90">
-                  {settings?.addressStreet || 'Survey No.19, Vajdi (Vad), Kalawad Road,'}<br/>
+                  {settings?.addressStreet || 'Ghatula, Khairagarh,'}<br/>
                   {settings?.addressArea ? `${settings.addressArea}, ` : ''}
-                  {settings?.addressCity || 'Lodhika, Rajkot'} - {settings?.addressPincode || '360021'}, {settings?.addressState || 'Rajnandgaon (India)'}.
+                  {settings?.addressCity || 'Rajnandgaon'} - {settings?.addressPincode || '491441'}, {settings?.addressState || 'Chhattisgarh (India)'}.
                 </p>
               </div>
  

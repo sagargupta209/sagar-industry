@@ -40,7 +40,7 @@ export default function AboutPage() {
       
       {/* ── Hero Section ── */}
       <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden bg-[#1a237e] text-white">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1599488615731-7e5128160cc3?q=80&w=1974&auto=format&fit=crop')] opacity-10 bg-cover bg-center"></div>
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1605204482084-5a2656965154?q=80&w=2070&auto=format&fit=crop')] opacity-10 bg-cover bg-center"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-[#1a237e]/80 to-[#1a237e]/95"></div>
         <div className="absolute top-0 right-0 w-96 h-96 bg-yellow-400 rounded-full blur-3xl opacity-20 -mr-20 -mt-20"></div>
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-green-500 rounded-full blur-3xl opacity-20 -ml-20 -mb-20"></div>
@@ -98,7 +98,7 @@ export default function AboutPage() {
             >
               <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
                 <img 
-                  src="https://images.unsplash.com/photo-1599488615731-7e5128160cc3?q=80&w=1974&auto=format&fit=crop" 
+                  src="https://images.unsplash.com/photo-1605204482084-5a2656965154?q=80&w=2070&auto=format&fit=crop" 
                   alt="Sagar Industry Manufacturing" 
                   className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
                 />
@@ -130,7 +130,7 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-6 text-lg text-gray-600 leading-relaxed text-left">
                 <p>
-                  Established in <span className="font-bold text-gray-900">2005</span>, <span className="font-bold text-[#1a237e]">Sagar Industry and Sai Food Product</span> emerged as a premier packaged food company in Rajkot. Founded by the visionary <span className="font-bold text-gray-900">Late Shri Gurmuk Das Motlani ji</span>, our unit has been a symbol of quality and trust for nearly two decades.
+                  Established in <span className="font-bold text-gray-900">2005</span>, <span className="font-bold text-[#1a237e]">Sagar Industry and Sai Food Product</span> emerged as a premier packaged food company in Rajnandgaon. Founded by the visionary <span className="font-bold text-gray-900">Late Shri Gurmuk Das Motlani ji</span>, our unit has been a symbol of quality and trust for nearly two decades.
                 </p>
                 <p>
                   Our legacy is defined by a deep-rooted commitment to manufacturing the finest <span className="text-gray-900 font-semibold">Snacks, Delicious Biscuits, Rusks, Cookies, and Cream Rolls</span>. From a localized presence, we have grown into a brand with a strong national footprint, constantly making progressive efforts to establish our mark across the entire country.

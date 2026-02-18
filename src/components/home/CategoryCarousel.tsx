@@ -9,7 +9,7 @@ import Image from 'next/image';
 const defaultStyles = [
   { 
     bg: 'bg-gradient-to-br from-red-500 to-red-700', 
-    decor: 'https://images.unsplash.com/photo-1621447504864-284aa8778bf6?q=80&w=1974'
+    decor: 'https://images.unsplash.com/photo-1605204482084-5a2656965154?q=80&w=2070'
   },
   { 
     bg: 'bg-gradient-to-br from-orange-400 to-orange-600', 
@@ -29,10 +29,24 @@ const defaultStyles = [
   },
 ];
 
-const CategoryCarousel = () => {
+interface CategoryCarouselProps {
+  initialData?: any[];
+}
+
+const CategoryCarousel = ({ initialData }: CategoryCarouselProps) => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
-  const [categories, setCategories] = useState<any[]>([]);
+  
+  const formatCategories = (data: any[]) => {
+    return data.map((cat: any, i: number) => ({
+      ...cat,
+      id: cat._id || cat.id,
+      desc: 'Premium Quality Snacks', 
+      ...defaultStyles[i % defaultStyles.length]
+    }));
+  };
+
+  const [categories, setCategories] = useState<any[]>(initialData ? formatCategories(initialData) : []);
 
   useEffect(() => {
     if (carouselRef.current) {
@@ -41,34 +55,28 @@ const CategoryCarousel = () => {
   }, [categories]);
 
   useEffect(() => {
+      if (initialData && initialData.length > 0) return;
+
       const fetchCategories = async () => {
           try {
               const res = await fetch('/api/categories');
               if (!res.ok) {
-                  console.warn(`Failed to fetch categories: ${res.status} ${res.statusText}`);
                   useFallback();
                   return;
               }
               const contentType = res.headers.get("content-type");
               if (!contentType || !contentType.includes("application/json")) {
-                  console.warn("Received non-JSON response from /api/categories");
                   useFallback();
                   return;
               }
               const data = await res.json();
               if(data.success && data.data && data.data.length > 0) {
-                  const formatted = data.data.map((cat: any, i: number) => ({
-                      ...cat,
-                      id: cat._id,
-                      desc: 'Premium Quality Snacks', 
-                      ...defaultStyles[i % defaultStyles.length]
-                  }));
-                  setCategories(formatted);
+                  setCategories(formatCategories(data.data));
               } else {
                   useFallback();
+                  return;
               }
           } catch (e) {
-              console.warn("Failed to fetch categories", e);
               useFallback();
           }
       };
@@ -81,21 +89,21 @@ const CategoryCarousel = () => {
               desc: 'Simply Salted & Masala Masti',
               bg: 'bg-gradient-to-br from-red-500 to-red-700', 
               image: 'https://images.unsplash.com/photo-1566478919030-26d9e54179d6?q=80&w=1974', 
-              decor: 'https://images.unsplash.com/photo-1621447504864-284aa8778bf6?q=80&w=1974'
+              decor: 'https://images.unsplash.com/photo-1605204482084-5a2656965154?q=80&w=2070'
             },
             { 
               id: 2, 
               name: 'Namkeen', 
               desc: 'Bhel Mix & Sev Mamra',
               bg: 'bg-gradient-to-br from-orange-400 to-orange-600', 
-              image: 'https://images.unsplash.com/photo-1599488615731-7e5128160cc3?q=80&w=1974', 
+              image: 'https://images.unsplash.com/photo-1605204482084-5a2656965154?q=80&w=2070', 
               decor: 'https://images.unsplash.com/photo-1613919113640-25732ec5e61f?q=80&w=2070' 
             }
          ]);
       };
 
       fetchCategories();
-  }, []);
+  }, [initialData]);
 
   return (
     <section className="pt-4 pb-2 md:py-20 bg-gray-50 overflow-hidden relative">
@@ -180,7 +188,7 @@ const CategoryCarousel = () => {
                                   src={cat.image} 
                                   width={400} 
                                   height={400} 
-                                  className="drop-shadow-2xl object-contain"
+                                  className="drop-shadow-2xl object-contain text-white text-center flex items-center justify-center font-bold"
                                    style={{ width: '100%', height: 'auto' }} 
                                   alt={cat.name} 
                                 />

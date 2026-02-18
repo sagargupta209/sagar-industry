@@ -59,7 +59,7 @@ export default function FAQPage() {
         {
           id: 0,
           q: 'Where are your products manufactured?',
-          a: 'All our products are manufactured in our state-of-the-art facility in Rajkot, Gujarat. We adhere to the highest international quality and hygiene standards to ensure every pack is fresh and safe.'
+          a: 'All our products are manufactured in our state-of-the-art facility in Rajnandgaon, Chhattisgarh. We adhere to the highest international quality and hygiene standards to ensure every pack is fresh and safe.'
         },
         {
           id: 1,

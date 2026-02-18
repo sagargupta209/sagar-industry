@@ -98,9 +98,9 @@ export default function ContactPage() {
                       <p className="text-white/60 text-sm font-semibold uppercase tracking-wider mb-1">Headquarters</p>
                       <p className="text-lg font-medium leading-relaxed">
                         {settings?.companyName || 'Sagar Industries Pvt. Ltd.'}<br/>
-                        {settings?.addressStreet || 'Plot No. 45, GIDC Phase II'}<br/>
+                        {settings?.addressStreet || 'Ghatula, Khairagarh'}<br/>
                         {settings?.addressArea ? `${settings.addressArea}, ` : ''}
-                        {settings?.addressCity || 'Rajkot'} - {settings?.addressPincode || '360003'}, {settings?.addressState || 'Gujarat'}.
+                        {settings?.addressCity || 'Rajnandgaon'} - {settings?.addressPincode || '491441'}, {settings?.addressState || 'Chhattisgarh'}.
                       </p>
                     </div>
                   </div>

@@ -2,6 +2,10 @@
 
 import Link from 'next/link';
 
+import Image from 'next/image';
+
+const BLUR_DATA_URL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
+
 export default function ShopHero() {
   return (
     <section className="relative w-full overflow-hidden bg-[#22c55e]">
@@ -64,10 +68,15 @@ export default function ShopHero() {
             <div className="relative w-full aspect-square max-w-[300px] sm:max-w-[400px] lg:max-w-none mx-auto">
               {/* Central product showcase circle */}
               <div className="absolute inset-4 bg-white/10 backdrop-blur-md rounded-full border-2 border-white/20 flex items-center justify-center shadow-2xl overflow-hidden ring-8 ring-white/5">
-                 <img 
+                 <Image 
                    src="https://images.unsplash.com/photo-1613919113640-25732ec5e61f?q=80&w=1000&auto=format&fit=crop" 
                    alt="Premium Snacks" 
-                   className="w-full h-full object-cover brightness-110 group-hover:scale-110 transition-transform duration-700"
+                   fill
+                   priority
+                   placeholder="blur"
+                   blurDataURL={BLUR_DATA_URL}
+                   sizes="(max-width: 640px) 300px, (max-width: 1024px) 400px, 500px"
+                   className="object-cover brightness-110 group-hover:scale-110 transition-transform duration-700"
                  />
               </div>
 

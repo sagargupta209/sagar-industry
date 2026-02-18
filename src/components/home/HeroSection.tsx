@@ -12,35 +12,50 @@ const BLUR_DATA_URL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAY
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  initialData?: IHeroSlide[];
+}
+
+const HeroSection = ({ initialData }: HeroSectionProps) => {
   const [current, setCurrent] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(false);
-  const { data, error, isLoading, mutate } = useSWR('/api/hero', fetcher);
+  const [isFirstRender, setIsFirstRender] = useState(true);
+
+  const { data, error, isLoading, mutate } = useSWR('/api/hero', fetcher, {
+    fallbackData: initialData ? { success: true, data: initialData } : undefined
+  });
   
-  const slides = data?.success ? data.data : [];
+  const slides = data?.success ? data.data : (initialData || []);
   
   useEffect(() => {
-    // Preload next image to avoid flicker
-    if (slides.length > 0) {
-      slides.forEach((s: any) => {
+    setIsFirstRender(false);
+  }, []);
+
+  useEffect(() => {
+    // Preload ONLY the next slide to save bandwidth for the current LCP image
+    if (slides.length > 1) {
+      const nextIndex = (current + 1) % slides.length;
+      const nextSlide = slides[nextIndex];
+      
+      const preloadImage = (src: string) => {
+        if (!src) return;
         const img = new (window as any).Image();
-        img.src = s.image;
-        if (s.imageMobile) {
-          const imgMobile = new (window as any).Image();
-          imgMobile.src = s.imageMobile;
-        }
-      });
+        img.src = src;
+      };
+
+      preloadImage(nextSlide.image);
+      if (nextSlide.imageMobile) preloadImage(nextSlide.imageMobile);
     }
 
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, [slides.length]);
+  }, [current, slides]);
 
   const slide = slides.length > 0 && slides[current] ? slides[current] : null;
 
-  if (error) {
+  if (error && !slides.length) {
     return (
         <div className="relative h-[50vh] md:h-[70vh] w-full flex flex-col items-center justify-center bg-gray-50 px-6 text-center">
             <div className="bg-red-50 p-6 rounded-3xl border border-red-100 max-w-md">
@@ -57,17 +72,17 @@ const HeroSection = () => {
     );
   }
 
-  if (isLoading || !slide) {
+  if ((isLoading && !slides.length) || !slide) {
     return <HeroSkeleton />; 
   }
 
   return (
     <div className="relative w-full h-[80vh] md:h-screen bg-white overflow-hidden">
 
-      <AnimatePresence mode="popLayout">
+      <AnimatePresence mode="popLayout" initial={false}>
         <motion.div
           key={slide._id || slide.id || current}
-          initial={{ opacity: 0 }}
+          initial={isFirstRender ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8 }}
@@ -75,7 +90,7 @@ const HeroSection = () => {
         >
              <motion.div
                className="hidden md:block absolute inset-0 w-full h-full"
-               initial={{ scale: 1.15 }}
+               initial={isFirstRender ? { scale: 1 } : { scale: 1.15 }}
                animate={{ scale: 1 }}
                transition={{ duration: 10, ease: "easeOut" }}
              >
@@ -86,9 +101,9 @@ const HeroSection = () => {
                   priority
                   quality={90}
                   sizes="100vw"
-                  className="object-cover lg:object-fill"
                   placeholder="blur"
                   blurDataURL={BLUR_DATA_URL}
+                  className="object-cover lg:object-fill"
                   onLoad={() => setImageLoaded(true)}
                 />
              </motion.div>
@@ -97,7 +112,7 @@ const HeroSection = () => {
           {(slide.imageMobile || slide.image) && (
              <motion.div 
                className="block md:hidden relative w-full h-full"
-               initial={{ scale: 1.1 }}
+               initial={isFirstRender ? { scale: 1 } : { scale: 1.1 }}
                animate={{ scale: 1 }}
                transition={{ duration: 8, ease: "easeOut" }}
              >
@@ -106,11 +121,11 @@ const HeroSection = () => {
                   alt="Hero Background Mobile" 
                   fill
                   priority
-                  quality={80}
+                  quality={85}
                   sizes="100vw"
-                  className="object-cover object-center"
                   placeholder="blur"
                   blurDataURL={BLUR_DATA_URL}
+                  className="object-cover object-center"
                   onLoad={() => setImageLoaded(true)}
                 />
              </motion.div>
@@ -147,40 +162,44 @@ const HeroSection = () => {
         </motion.div>
       </AnimatePresence>
 
-      <motion.button 
-        onClick={() => setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1))}
-        whileHover={{ scale: 1.1, backgroundColor: 'rgba(0,0,0,0.4)' }}
-        whileTap={{ scale: 0.9 }}
-        className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-[var(--z-hero-nav)] p-2 bg-black/20 rounded-full text-white transition-colors focus:outline-none flex items-center justify-center"
-        aria-label="Previous Slide"
-      >
-        <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
-      </motion.button>
-       <motion.button 
-        onClick={() => setCurrent((prev) => (prev + 1) % slides.length)}
-        whileHover={{ scale: 1.1, backgroundColor: 'rgba(0,0,0,0.4)' }}
-        whileTap={{ scale: 0.9 }}
-        className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-[var(--z-hero-nav)] p-2 bg-black/20 rounded-full text-white transition-colors focus:outline-none flex items-center justify-center"
-        aria-label="Next Slide"
-      >
-        <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
-      </motion.button>
-      
-      <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-[var(--z-hero-nav)] flex space-x-2">
-      {/* indicators */}
-        {slides.map((s: IHeroSlide, index: number) => (
-          <motion.button
-            key={s._id || s.id || index}
-            onClick={() => setCurrent(index)}
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.8 }}
-            className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all ${index === current ? 'bg-orange-500 w-6 md:w-8' : 'bg-black/20'}`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
-      </div>
+      {slides.length > 1 && (
+        <>
+          <motion.button 
+            onClick={() => setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1))}
+            whileHover={{ scale: 1.1, backgroundColor: 'rgba(0,0,0,0.4)' }}
+            whileTap={{ scale: 0.9 }}
+            className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-[var(--z-hero-nav)] p-2 bg-black/20 rounded-full text-white transition-colors focus:outline-none flex items-center justify-center"
+            aria-label="Previous Slide"
+          >
+            <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
+          </motion.button>
+          <motion.button 
+            onClick={() => setCurrent((prev) => (prev + 1) % slides.length)}
+            whileHover={{ scale: 1.1, backgroundColor: 'rgba(0,0,0,0.4)' }}
+            whileTap={{ scale: 0.9 }}
+            className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-[var(--z-hero-nav)] p-2 bg-black/20 rounded-full text-white transition-colors focus:outline-none flex items-center justify-center"
+            aria-label="Next Slide"
+          >
+            <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
+          </motion.button>
+          
+          <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-[var(--z-hero-nav)] flex space-x-2">
+            {slides.map((s: IHeroSlide, index: number) => (
+              <motion.button
+                key={s._id || s.id || index}
+                onClick={() => setCurrent(index)}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.8 }}
+                className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all ${index === current ? 'bg-orange-500 w-6 md:w-8' : 'bg-black/20'}`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 };
 
 export default HeroSection;
+
