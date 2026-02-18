@@ -64,7 +64,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-[var(--z-navbar-top)] bg-[#1a237e] text-white py-1 md:py-2.5 text-[10px] md:text-xs font-bold tracking-widest uppercase shadow-sm">
+      <div className="hidden md:block fixed top-0 left-0 right-0 z-[var(--z-navbar-top)] bg-[#1a237e] text-white py-1 md:py-2.5 text-[10px] md:text-xs font-bold tracking-widest uppercase shadow-sm">
         <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
           <div className="flex items-center space-x-5">
             {settings?.phonePrimary && (
@@ -98,7 +98,7 @@ const Navbar = () => {
 
       <nav
         className={clsx(
-          'fixed top-[32px] md:top-[52px] left-0 right-0 z-[var(--z-navbar)] transition-all duration-300 shadow-md',
+          'fixed top-0 md:top-[52px] left-0 right-0 z-[var(--z-navbar)] transition-all duration-300 shadow-md',
           'bg-[#FFD700] text-black' // Bright Yellow Background
         )}
       >
