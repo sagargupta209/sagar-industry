@@ -5,37 +5,46 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 const Preloader = () => {
-  // Check if we are already loaded on mount (client-side navigation or fast connection)
-  const isLoaded = typeof window !== 'undefined' && (document.readyState === 'complete' || document.readyState === 'interactive');
-  const [loading, setLoading] = useState(!isLoaded);
-  const [percent, setPercent] = useState(isLoaded ? 100 : 0);
+  const [loading, setLoading] = useState(true);
+  const [percent, setPercent] = useState(0);
 
   useEffect(() => {
-    if (isLoaded) return;
-
     let interval: NodeJS.Timeout;
     let fallbackTimeout: NodeJS.Timeout;
+    
+    // Check initial state carefully
+    const isAlreadyLoaded = typeof window !== 'undefined' && 
+      (document.readyState === 'complete' || document.readyState === 'interactive');
 
     const finishLoading = () => {
       clearInterval(interval);
       clearTimeout(fallbackTimeout);
       setPercent(100);
+      // Small delay to let the 100% register visually if desired, 
+      // but here we just want it gone.
       setLoading(false);
     };
 
     const startLoading = () => {
       let currentProgress = 0;
       interval = setInterval(() => {
-        currentProgress += Math.random() * 30; // Faster progress
-        if (currentProgress >= 95) {
+        currentProgress += Math.random() * 15;
+        if (currentProgress >= 99) {
           clearInterval(interval);
           setPercent(99);
         } else {
           setPercent(Math.floor(currentProgress));
         }
-      }, 20);
+      }, 50);
     };
 
+    if (isAlreadyLoaded) {
+      setPercent(100);
+      setLoading(false);
+      return;
+    }
+
+    // Start progress animation
     startLoading();
 
     const handleInteractive = () => {
@@ -44,21 +53,19 @@ const Preloader = () => {
       }
     };
 
-    if (document.readyState === 'complete' || document.readyState === 'interactive') {
-        finishLoading();
-    } else {
-        document.addEventListener('readystatechange', handleInteractive);
-    }
+    document.addEventListener('readystatechange', handleInteractive);
+    window.addEventListener('load', finishLoading);
 
-    // Absolute fallback reduced to 500ms
-    fallbackTimeout = setTimeout(finishLoading, 500);
+    // Guaranteed fallback after 1.5 seconds so users are NEVER stuck
+    fallbackTimeout = setTimeout(finishLoading, 1500);
 
     return () => {
       clearInterval(interval);
       clearTimeout(fallbackTimeout);
       document.removeEventListener('readystatechange', handleInteractive);
+      window.removeEventListener('load', finishLoading);
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <AnimatePresence>
