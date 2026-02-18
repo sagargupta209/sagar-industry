@@ -12,9 +12,7 @@ const nextConfig: NextConfig = {
     ],
     qualities: [75, 80],
   },
-  experimental: {
-    reactCompiler: true,
-  },
+  reactCompiler: true,
 };
 
 export default nextConfig;
